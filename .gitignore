@@ -1,0 +1,11 @@
+/node_modules
+/coverage
+/config/secrets
+/build
+/test_report
+/.next
+/.vscode
+/.idea
+.env*.local
+/.npmrc
+/.DS_Store
