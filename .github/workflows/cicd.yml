@@ -24,4 +24,4 @@ jobs:
       - name: Test the app
         uses: borales/actions-yarn@v4
         with:
-          cmd: test:unit # will run `yarn test:unit` command
+          cmd: ci:test:unit # will run `yarn ci:test:unit` command

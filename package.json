@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:unit": "jest --config ./config/jest/jest.config.ts --watch"
+    "test:unit": "jest --config ./config/jest/jest.config.ts --watch",
+    "ci:test:unit": "jest a --config ./config/jest/jest.config.ts"
   },
   "dependencies": {
     "@types/node": "20.5.7",
