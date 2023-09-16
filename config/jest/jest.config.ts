@@ -45,6 +45,22 @@ const config: Config = {
   rootDir: "../../",
 
   setupFilesAfterEnv: ["<rootDir>config/jest/setupTests.ts"],
+
+  // A map from regular expressions to paths to transformers
+  transform: {
+    "^.+\\.(t|j)sx?$": [
+      "@swc/jest",
+      {
+        jsc: {
+          transform: {
+            react: {
+              runtime: "automatic",
+            },
+          },
+        },
+      },
+    ],
+  },
   // Indicates whether the coverage information should be collected while executing the test
   // collectCoverage: false,
 
@@ -168,9 +184,6 @@ const config: Config = {
 
   // This option allows use of a custom test runner
   // testRunner: "jest-circus/runner",
-
-  // A map from regular expressions to paths to transformers
-  // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
