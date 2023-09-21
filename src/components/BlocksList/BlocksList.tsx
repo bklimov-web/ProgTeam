@@ -1,8 +1,8 @@
 "use client";
 
-import { Menu } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { FC } from "react";
+import { Menu } from "lucide-react";
 
 const BLOCKS = [
   {
