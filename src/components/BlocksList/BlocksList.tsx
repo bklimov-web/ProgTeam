@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "../ui/button";
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { Menu } from "lucide-react";
 
 const BLOCKS = [
@@ -22,23 +22,39 @@ const BLOCKS = [
   },
 ];
 
-const BlocksList: FC = () => {
+type Props = {
+  addComponents?: Dispatch<SetStateAction<any[]>>;
+  createBlock: () => any;
+};
+
+const BlocksList: FC<Props> = ({ createBlock, addComponents }) => {
   const handleClickAll = () => undefined;
 
+  const handleAddTextBlock = () => {
+    createBlock();
+  };
+
   return (
-    <div className="flex justify-between gap-5">
-      <Button onClick={handleClickAll}>
-        <Menu className="pr-2" />
-        All blocks
-      </Button>
-      <ul className="flex">
-        {BLOCKS.map(({ id, label, onClick }) => (
-          <Button onClick={onClick} variant={"blocks-list"} key={id}>
-            {label}
-          </Button>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="flex justify-between gap-5 mt-[80px]">
+        <Button onClick={handleClickAll}>
+          <Menu className="pr-2" />
+          All blocks
+        </Button>
+
+        <ul className="flex">
+          {BLOCKS.map(({ id, label, onClick }) => (
+            <Button
+              onClick={handleAddTextBlock}
+              variant={"blocks-list"}
+              key={id}
+            >
+              {label}
+            </Button>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
