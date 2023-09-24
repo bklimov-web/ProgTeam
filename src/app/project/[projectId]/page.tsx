@@ -1,7 +1,6 @@
 import { Block } from "@prisma/client";
-import { prisma } from "app/db";
-import Screen from "components/Screen/Screen";
-import TextBlock from "components/TextBlock/TextBlock";
+import BlocksList from "components/BlocksList";
+import NewBlock from "components/NewBlock";
 import { apiBaseUrl } from "constants/constants";
 import { MoveLeft } from "lucide-react";
 import { revalidatePath } from "next/cache";
@@ -57,23 +56,9 @@ const Project = async ({
         <MoveLeft />
       </Link>
 
-      {blocks.map(({ description, title, subtitle, id }) => {
-        const content = { description, subtitle, title, id };
+      <BlocksList blocks={blocks} projectId={+projectId} />
 
-        const handleDelete = async () => {
-          "use server";
-
-          await prisma.block.delete({
-            where: { id, projectId: +projectId },
-          });
-
-          revalidatePath(`/project/${projectId}`);
-        };
-
-        return <TextBlock key={id} content={content} onDelete={handleDelete} />;
-      })}
-
-      <Screen createBlock={handleAddNewBlock} />
+      <NewBlock createBlock={handleAddNewBlock} />
     </div>
   );
 };

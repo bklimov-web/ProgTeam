@@ -6,7 +6,6 @@ export const POST = async (request: NextRequest) => {
 
   if (projectId) {
     try {
-      console.log(request.nextUrl.searchParams.get("projectId"));
       const newBlock = await prisma.block.create({
         data: {
           description: "Description",

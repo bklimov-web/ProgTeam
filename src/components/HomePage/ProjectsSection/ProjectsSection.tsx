@@ -19,13 +19,12 @@ const ProjectsSection: FC<Props> = ({ projects, onDelete }) => {
     <section className="flex items-center justify-center gap-[20px]">
       {projects.map(({ name, id }) => {
         return (
-          <div className="relative cursor-pointer">
+          <div key={id} className="relative cursor-pointer">
             <XSquare
               onClick={() => handleDelete(id)}
               className="absolute right-2 top-2"
             />
             <Link
-              key={id}
               className="flex justify-center items-center w-[100px] h-[100px] bg-blue-200"
               href={`project/${id}`}
             >

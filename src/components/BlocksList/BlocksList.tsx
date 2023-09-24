@@ -1,60 +1,33 @@
-"use client";
-
-import { Button } from "../ui/button";
-import { Dispatch, FC, SetStateAction } from "react";
-import { Menu } from "lucide-react";
-
-const BLOCKS = [
-  {
-    id: "text",
-    label: "Text",
-    onClick: () => undefined,
-  },
-  {
-    id: "images",
-    label: "Images",
-    onClick: () => undefined,
-  },
-  {
-    id: "other",
-    label: "Other",
-    onClick: () => undefined,
-  },
-];
+import { Block } from "@prisma/client";
+import { prisma } from "app/db";
+import TextBlock from "components/TextBlock";
+import { revalidatePath } from "next/cache";
+import { FC } from "react";
 
 type Props = {
-  addComponents?: Dispatch<SetStateAction<any[]>>;
-  createBlock: () => any;
+  blocks: Block[];
+  projectId: number;
 };
 
-const BlocksList: FC<Props> = ({ createBlock, addComponents }) => {
-  const handleClickAll = () => undefined;
-
-  const handleAddTextBlock = () => {
-    createBlock();
-  };
-
+const BlocksList: FC<Props> = ({ blocks, projectId }) => {
   return (
-    <>
-      <div className="flex justify-between gap-5 mt-[80px]">
-        <Button onClick={handleClickAll}>
-          <Menu className="pr-2" />
-          All blocks
-        </Button>
+    <section className="">
+      {blocks.map(({ description, title, subtitle, id }) => {
+        const content = { description, subtitle, title, id };
 
-        <ul className="flex">
-          {BLOCKS.map(({ id, label, onClick }) => (
-            <Button
-              onClick={handleAddTextBlock}
-              variant={"blocks-list"}
-              key={id}
-            >
-              {label}
-            </Button>
-          ))}
-        </ul>
-      </div>
-    </>
+        const handleDelete = async () => {
+          "use server";
+
+          await prisma.block.delete({
+            where: { id, projectId: projectId },
+          });
+
+          revalidatePath(`/project/${projectId}`);
+        };
+
+        return <TextBlock key={id} content={content} onDelete={handleDelete} />;
+      })}
+    </section>
   );
 };
 
