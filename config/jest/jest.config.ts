@@ -61,6 +61,13 @@ const config: Config = {
       },
     ],
   },
+
+  modulePaths: ["<rootDir>src"],
+  // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
+  // moduleNameMapper: {
+  //   "*": "<rootDir>/src"
+  // },
+
   // Indicates whether the coverage information should be collected while executing the test
   // collectCoverage: false,
 
