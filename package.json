@@ -8,6 +8,7 @@
     "start": "next start",
     "test:unit": "jest --config ./config/jest/jest.config.ts --watch",
     "ci:test:unit": "jest a --config ./config/jest/jest.config.ts",
+    "lint": "lint-staged",
     "husky": "husky install"
   },
   "dependencies": {
@@ -34,6 +35,8 @@
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.6.4",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
     "ts-node": "^10.9.1"
   }
 }
