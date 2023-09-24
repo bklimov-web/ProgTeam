@@ -2,32 +2,37 @@ import { prisma } from "app/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-  try {
-    const body = await request.json();
-    const { title, description, subtitle } = body;
+  const projectId = Number(request.nextUrl.searchParams.get("projectId"));
 
-    const newBlock = await prisma.block.create({
-      data: {
-        description: "description",
-        title: "TITLE-NEW",
-        subtitle: "subtitle",
-        projectId: 1,
-      },
-    });
+  if (projectId) {
+    try {
+      console.log(request.nextUrl.searchParams.get("projectId"));
+      const newBlock = await prisma.block.create({
+        data: {
+          description: "Description",
+          title: "TITLE",
+          subtitle: "Subtitle",
+          projectId,
+        },
+      });
 
-    return NextResponse.json(newBlock);
-  } catch (err) {
-    return NextResponse.json({ message: "POST Error", err }, { status: 500 });
+      return NextResponse.json(newBlock);
+    } catch (err) {
+      return NextResponse.json({ message: "POST Error", err }, { status: 500 });
+    }
   }
 };
 
 export const GET = async (request: NextRequest) => {
-  try {
-    const id = +request.nextUrl.searchParams.get("id");
-    const blocks = await prisma.block.findMany({ where: { projectId: id } });
+  const projectId = Number(request.nextUrl.searchParams.get("projectId"));
 
-    return NextResponse.json(blocks);
-  } catch (err) {
-    return NextResponse.json({ message: "GET Error", err }, { status: 500 });
+  if (projectId) {
+    try {
+      const blocks = await prisma.block.findMany({ where: { projectId } });
+
+      return NextResponse.json(blocks);
+    } catch (err) {
+      return NextResponse.json({ message: "GET Error", err }, { status: 500 });
+    }
   }
 };

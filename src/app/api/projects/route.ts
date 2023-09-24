@@ -1,14 +1,13 @@
 import { prisma } from "app/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const POST = async (request) => {
+export const POST = async (request: NextRequest) => {
   try {
-    const body = await request.json();
-    const { name } = body;
+    const { name } = await request.json();
 
     const newProject = await prisma.project.create({
       data: {
-        name: "Test",
+        name,
       },
     });
 
