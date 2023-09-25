@@ -11,7 +11,7 @@ type Props = {
 
 const BlocksList: FC<Props> = ({ blocks, projectId }) => {
   return (
-    <section className="">
+    <section>
       {blocks.map(({ description, title, subtitle, id }) => {
         const content = { description, subtitle, title, id };
 
