@@ -6,6 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 Run `npx prisma migrate dev --name init` to initiate database
+Run `yarn husky` to install husky
 
 Yarn v1 is being used on this project.
 
