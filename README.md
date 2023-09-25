@@ -1,6 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+[Component library](https://ui.shadcn.com/)
+[Icons](https://lucide.dev/icons/)
+
 ## Getting Started
+
+Run `npx prisma migrate dev --name init` to initiate database
 
 Yarn v1 is being used on this project.
 
