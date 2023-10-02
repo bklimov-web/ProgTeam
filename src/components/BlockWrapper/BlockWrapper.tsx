@@ -13,12 +13,6 @@ type Props = {
   content: any;
 };
 
-const Trigger = () => (
-  <Button className="absolute left-[100px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-    Settings
-  </Button>
-);
-
 const BlockWrapper = ({
   children,
   handleDelete,
@@ -31,7 +25,11 @@ const BlockWrapper = ({
         content={
           <TextBlockForm updateBlock={updateBlock} defaultValues={content} />
         }
-        trigger={<Trigger />}
+        trigger={
+          <Button className="absolute left-[100px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Settings
+          </Button>
+        }
       />
 
       {children}
