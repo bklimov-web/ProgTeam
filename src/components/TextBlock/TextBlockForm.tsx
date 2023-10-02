@@ -46,6 +46,17 @@ function TextBlockConfig({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <div className="flex">
+          <Button className="w-[50%]" type="submit">
+            Save
+          </Button>
+          <SheetClose className="w-[50%]" asChild>
+            <Button variant={"secondary"} type="submit">
+              Save and close
+            </Button>
+          </SheetClose>
+        </div>
+
         <FormField
           control={form.control}
           name="subtitle"
@@ -94,10 +105,6 @@ function TextBlockConfig({
             </FormItem>
           )}
         />
-        <Button type="submit">Save</Button>
-        <SheetClose asChild>
-          <Button type="submit">Save and close</Button>
-        </SheetClose>
       </form>
     </Form>
   );

@@ -1,12 +1,4 @@
-"use client";
-
-import {
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  Sheet,
-} from "components/ui/sheet";
+import { SheetTrigger, SheetContent, Sheet } from "components/ui/sheet";
 import { ReactNode } from "react";
 
 const SettingsSidebar = ({
@@ -20,10 +12,7 @@ const SettingsSidebar = ({
     <Sheet>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent className="p-4" side={"left"}>
-        <SheetHeader>
-          <SheetTitle>Are you sure absolutely sure?</SheetTitle>
-          {content}
-        </SheetHeader>
+        {content}
       </SheetContent>
     </Sheet>
   );
