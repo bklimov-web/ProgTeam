@@ -1,7 +1,7 @@
 import { Project } from "@prisma/client";
 import { apiBaseUrl } from "constants/constants";
-import AddProjectForm from "./AddProjectForm";
-import ProjectsSection from "./ProjectsSection";
+import AddProjectForm from "./add-project-form";
+import ProjectsSection from "./projects-section";
 import { prisma } from "app/db";
 import { revalidatePath } from "next/cache";
 
