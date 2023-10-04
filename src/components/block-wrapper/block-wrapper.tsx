@@ -1,8 +1,8 @@
 "use client";
 
-import { SettingsSidebar } from "components/SettingsSidebar";
-import TextBlockForm from "components/TextBlock/TextBlockForm";
-import { Button } from "components/ui/button";
+import { Sidebar } from "components/shared/sidebar";
+import TextBlockForm from "components/blocks/text-block/text-block-form";
+import { Button } from "components/shared/ui/button";
 import { Plus, Trash2 } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -21,7 +21,7 @@ const BlockWrapper = ({
 }: Props) => {
   return (
     <div className="relative group align-middle h-[300px] bg-blue-100 w-screen text-center">
-      <SettingsSidebar
+      <Sidebar
         content={
           <TextBlockForm updateBlock={updateBlock} defaultValues={content} />
         }

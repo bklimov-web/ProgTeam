@@ -1,7 +1,7 @@
-import { SheetTrigger, SheetContent, Sheet } from "components/ui/sheet";
+import { SheetTrigger, SheetContent, Sheet } from "components/shared/ui/sheet";
 import { ReactNode } from "react";
 
-const SettingsSidebar = ({
+const Sidebar = ({
   trigger,
   content,
 }: {
@@ -18,4 +18,4 @@ const SettingsSidebar = ({
   );
 };
 
-export default SettingsSidebar;
+export default Sidebar;

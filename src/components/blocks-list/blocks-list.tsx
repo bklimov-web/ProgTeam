@@ -1,5 +1,5 @@
 import { Block } from "@prisma/client";
-import TextBlock from "components/TextBlock";
+import TextBlock from "components/blocks/text-block";
 import { FC } from "react";
 
 type Props = {

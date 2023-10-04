@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { Button } from "components/ui/button";
+import { Button } from "components/shared/ui/button";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -13,10 +13,10 @@ import {
   FormControl,
   FormDescription,
   FormMessage,
-} from "components/ui/form";
-import { Input } from "components/ui/input";
-import { TextBlockContentProps } from "./TextBlock";
-import { SheetClose } from "components/ui/sheet";
+} from "components/shared/ui/form";
+import { Input } from "components/shared/ui/input";
+import { TextBlockContentProps } from "./text-block";
+import { SheetClose } from "components/shared/ui/sheet";
 
 const formSchema = z.object({
   subtitle: z.string(),
@@ -31,7 +31,7 @@ function TextBlockConfig({
   updateBlock,
 }: {
   defaultValues: TextBlockContentProps;
-  updateBlock: (values: any) => void;
+  updateBlock: (values: TextBlockFormSchema) => void;
 }) {
   // 1. Define your form.
   const form = useForm<TextBlockFormSchema>({

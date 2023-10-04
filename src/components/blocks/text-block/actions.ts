@@ -1,6 +1,6 @@
 import { prisma } from "app/db";
 import { revalidatePath } from "next/cache";
-import { TextBlockFormSchema } from "./TextBlockForm";
+import { TextBlockFormSchema } from "./text-block-form";
 
 export const deleteBlock = async (id: number, projectId: number) => {
   "use server";

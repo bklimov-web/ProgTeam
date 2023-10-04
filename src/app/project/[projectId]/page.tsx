@@ -1,6 +1,6 @@
 import { Block } from "@prisma/client";
-import BlocksList from "components/BlocksList";
-import NewBlock from "components/NewBlock";
+import BlocksList from "components/blocks-list";
+import NewBlock from "components/new-block";
 import { apiBaseUrl } from "constants/constants";
 import { MoveLeft } from "lucide-react";
 import { revalidatePath } from "next/cache";
@@ -52,13 +52,13 @@ const Project = async ({
 
   return (
     <div data-auto="home" className="flex min-h-screen flex-col items-center">
-      <Link href="/" className="absolute left-4 top-4">
-        <MoveLeft />
-      </Link>
-
       <BlocksList blocks={blocks} projectId={+projectId} />
 
       <NewBlock createBlock={handleAddNewBlock} />
+
+      <Link href="/" className="absolute left-4 top-4">
+        <MoveLeft />
+      </Link>
     </div>
   );
 };

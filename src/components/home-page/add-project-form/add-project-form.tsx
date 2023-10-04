@@ -1,4 +1,4 @@
-import { Button } from "components/ui/button";
+import { Button } from "components/shared/ui/button";
 import { FC } from "react";
 
 type Props = {

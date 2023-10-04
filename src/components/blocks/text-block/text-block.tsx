@@ -1,5 +1,5 @@
 import { FC } from "react";
-import BlockWrapper from "components/BlockWrapper/BlockWrapper";
+import BlockWrapper from "components/block-wrapper/block-wrapper";
 import { deleteBlock, updateBlock } from "./actions";
 
 export type TextBlockContentProps = {
@@ -34,11 +34,6 @@ const TextBlock: FC<Props> = ({ content, id, projectId }) => {
       content={content}
     >
       <div className="flex flex-col justify-center mx-auto w-[1200px] h-full">
-        {/* <Clickable
-          onBlur={handleSave}
-          className="text-center"
-          text={subtitle}
-        /> */}
         <p>{subtitle}</p>
         <h1 className="text-3xl mt-10">{title}</h1>
         <p className="mt-10">{description}</p>
