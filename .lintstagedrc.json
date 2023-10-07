@@ -1,0 +1,10 @@
+{
+  "*.ts": [
+    "prettier --write"
+  ],
+  "*.tsx": [
+    "prettier --write"
+  ],
+  "*.scss": "prettier --write",
+  "*.css": "prettier --write"
+}

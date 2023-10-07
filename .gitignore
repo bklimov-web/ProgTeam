@@ -7,5 +7,7 @@
 /.vscode
 /.idea
 .env*.local
+.env
 /.npmrc
 /.DS_Store
+dev.db*
