@@ -25,6 +25,15 @@ export default function Home() {
               priority
             />
           </a>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates tempore repudiandae distinctio ipsam ex
+            assumenda libero id maiores vel eius. Aliquid, quisquam? Labore aperiam, ut iure praesentium accusamus similique
+            dolorum? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates numquam, consequatur nostrum
+            impedit maiores hic, minima nulla corrupti dolore dolor enim libero, quidem commodi vero! Aspernatur adipisci
+            atque velit corrupti? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo ut quod amet officia
+            quisquam explicabo labore minus! Hic, fugiat, quos, eum odit sunt blanditiis libero veritatis atque omnis molestias
+            deleniti.
+          </p>
         </div>
       </div>
 
