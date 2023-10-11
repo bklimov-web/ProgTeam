@@ -1,27 +1,24 @@
 "use client";
 
-import { Project } from "@prisma/client";
+import { deleteProject } from "lib/actions/project-actions";
 import { XSquare } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";
 
 type Props = {
-  projects: Project[];
-  onDelete: (id: number) => void;
+  projects: any[];
 };
 
-const ProjectsSection: FC<Props> = ({ projects, onDelete }) => {
-  const handleDelete = (id: number) => {
-    onDelete(id);
-  };
-
+const ProjectsSection: FC<Props> = ({ projects }) => {
   return (
     <section className="flex items-center justify-center gap-[20px]">
-      {projects.map(({ name, id }) => {
+      {projects.map(({ name, _id }) => {
+        const id = _id.toString();
+
         return (
           <div key={id} className="relative cursor-pointer">
             <XSquare
-              onClick={() => handleDelete(id)}
+              onClick={() => deleteProject(id)}
               className="absolute right-2 top-2"
             />
             <Link
