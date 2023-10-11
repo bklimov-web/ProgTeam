@@ -1,3 +1,4 @@
+import { ImageBlock } from "components/blocks/image-block";
 import TextBlock from "components/blocks/text-block";
 import { FC } from "react";
 
@@ -10,10 +11,9 @@ const BlocksList: FC<Props> = ({ blocks, projectId }) => {
   return (
     <section>
       {blocks.map((block) => {
+        const id = block._id.toString();
         if (block.type === "TextBlockModel") {
-          const { _id, title, subtitle, description } = block;
-
-          const id = _id.toString();
+          const { title, subtitle, description } = block;
 
           return (
             <TextBlock
@@ -27,14 +27,7 @@ const BlocksList: FC<Props> = ({ blocks, projectId }) => {
           );
         }
 
-        return (
-          <div
-            className="text-center p-20 bg-red-100"
-            key={block._id.toString()}
-          >
-            Image block
-          </div>
-        );
+        return <ImageBlock projectId={projectId} id={id} key={id} />;
       })}
     </section>
   );
