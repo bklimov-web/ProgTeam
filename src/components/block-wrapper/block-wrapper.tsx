@@ -11,6 +11,7 @@ type Props = {
   updateBlock: (values: any) => void;
   children: ReactNode;
   content: any;
+  className?: string;
 };
 
 const BlockWrapper = ({
@@ -18,9 +19,10 @@ const BlockWrapper = ({
   handleDelete,
   updateBlock,
   content,
+  className,
 }: Props) => {
   return (
-    <div className="relative group align-middle h-[300px] bg-blue-100 w-screen text-center">
+    <div className={`relative group align-middle h-fit w-screen ${className}`}>
       <Sidebar
         content={
           <TextBlockForm updateBlock={updateBlock} defaultValues={content} />
@@ -41,7 +43,7 @@ const BlockWrapper = ({
         <Trash2 />
       </Button>
 
-      <div className="flex z-10 justify-center items-center border-dashed w-screen border-b-[2px] h-[1px] border-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative -top-[1px]">
+      <div className="flex absolute -bottom-[1px] left-0 z-10 justify-center items-center border-dashed w-screen border-b-[2px] h-[1px] border-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <div className="flex justify-center items-center h-[30px] w-[30px] bg-foreground rounded-full">
           <Plus className="text-background cursor-pointer" />
         </div>
