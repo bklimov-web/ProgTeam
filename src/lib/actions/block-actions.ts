@@ -20,7 +20,7 @@ export const createBlock = async (projectId: string, data: any) => {
 
 export const updateBlock = async (id: string, data: any, type: string) => {
   "use server";
-  console.log(data);
+
   try {
     const newBlock = await BlockModel.findOneAndUpdate(
       { _id: id, type },
