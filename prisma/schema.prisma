@@ -11,16 +11,34 @@ datasource db {
 }
 
 model Project {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
-  blocks Block[]
+  blocks    Block[]
 }
 
 model Block {
-  id          Int  @id @default(autoincrement())
+  id             Int         @id @default(autoincrement())
+  type           String
+  projectId      Int
+  project        Project     @relation(fields: [projectId], references: [id])
+  contentIdText  Int?
+  contentIdImage Int?
+  textBlock      BlockText?  @relation("BlockText")
+  imageBlock     BlockImage? @relation("BlockImage")
+}
+
+model BlockText {
+  id          Int    @id @default(autoincrement())
   description String
   subtitle    String
   title       String
-  Project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId   Int
+  block       Block  @relation("BlockText", fields: [blockId], references: [id])
+  blockId     Int    @unique
+}
+
+model BlockImage {
+  id       Int    @id @default(autoincrement())
+  imageUrl String
+  block    Block  @relation("BlockImage", fields: [blockId], references: [id])
+  blockId  Int    @unique
 }

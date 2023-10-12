@@ -8,18 +8,20 @@ type Props = {
 };
 
 const BlocksList: FC<Props> = ({ blocks, projectId }) => {
+  console.log(blocks);
   return (
     <section>
-      {blocks.map(({ description, title, subtitle, id }) => {
-        const content = { description, subtitle, title, id };
+      {blocks.map(({ id }) => {
+        const content = { id };
 
         return (
-          <TextBlock
-            key={id}
-            projectId={+projectId}
-            id={+id}
-            content={content}
-          />
+          //  <TextBlock
+          //    key={id}
+          //    projectId={+projectId}
+          //    id={+id}
+          //    content={content}
+          //  />
+          <div> Hello</div>
         );
       })}
     </section>

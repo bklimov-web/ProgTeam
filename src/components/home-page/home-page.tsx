@@ -4,6 +4,7 @@ import AddProjectForm from "./add-project-form";
 import ProjectsSection from "./projects-section";
 import { prisma } from "app/db";
 import { revalidatePath } from "next/cache";
+import ImageBlock from "components/blocks/image-block/image-block";
 
 async function getProjects(): Promise<Project[]> {
   const res = await fetch(`${apiBaseUrl}/projects`, {
@@ -56,6 +57,8 @@ const HomePage = async () => {
       <ProjectsSection onDelete={deleteProject} projects={projects} />
 
       <AddProjectForm createNewProject={createNewProject} />
+
+      <ImageBlock />
     </div>
   );
 };

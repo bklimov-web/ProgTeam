@@ -2,7 +2,7 @@ import { prisma } from "app/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-  const { projectId } = await request.json();
+  const { projectId, type } = await request.json();
 
   if (projectId) {
     try {
@@ -12,6 +12,7 @@ export const POST = async (request: NextRequest) => {
           title: "TITLE",
           subtitle: "Subtitle",
           projectId: Number(projectId),
+          //  type: type
         },
       });
 

@@ -12,22 +12,21 @@ import {
   SheetClose,
   SheetTrigger,
 } from "components/shared/ui/sheet";
+import TextBlock from "../blocks/text-block";
+import ImageBlock from "components/blocks/image-block/image-block";
 
 const BLOCKS = [
   {
     id: "text",
     label: "Text",
-    onClick: () => undefined,
   },
   {
     id: "images",
     label: "Images",
-    onClick: () => undefined,
   },
   {
     id: "other",
     label: "Other",
-    onClick: () => undefined,
   },
 ];
 
@@ -43,6 +42,20 @@ const NewBlock: FC<Props> = ({ createBlock }) => {
 
   const handleAddTextBlock = () => {
     createBlock();
+  };
+
+  const addNewBlock = (id: string) => {
+    switch (id) {
+      case "text":
+        createBlock(); // Создать текстовый блок
+        break;
+      case "images":
+        createBlock(); // Создать блок с изображениями
+        break;
+      // Добавьте другие кейсы для других типов блоков, если необходимо
+      default:
+        break;
+    }
   };
 
   return (
@@ -67,8 +80,12 @@ const NewBlock: FC<Props> = ({ createBlock }) => {
       </Sheet>
 
       <ul className="flex">
-        {BLOCKS.map(({ id, label, onClick }) => (
-          <Button onClick={handleAddTextBlock} variant={"blocks-list"} key={id}>
+        {BLOCKS.map(({ id, label }) => (
+          <Button
+            onClick={() => addNewBlock(id)}
+            variant={"blocks-list"}
+            key={id}
+          >
             {label}
           </Button>
         ))}

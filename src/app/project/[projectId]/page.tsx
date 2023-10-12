@@ -1,3 +1,4 @@
+import React, { FC } from "react";
 import { Block } from "@prisma/client";
 import BlocksList from "components/blocks-list";
 import NewBlock from "components/new-block";
@@ -5,6 +6,9 @@ import { apiBaseUrl } from "constants/constants";
 import { MoveLeft } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
+
+import TextBlock from "components/blocks/text-block/text-block";
+import ImageBlock from "components/blocks/image-block/image-block";
 
 async function getBlocks(projectId: string): Promise<Block[]> {
   "use server";
@@ -49,6 +53,20 @@ const Project = async ({
     "use server";
     await createNewBlock(+projectId);
   };
+
+  //  type Props = {
+  //    blockType: string | null;
+  //  };
+
+  //  const BlockContainer: FC<Props> = ({ blockType }) => {
+  //    if (blockType === "text") {
+  //      return <TextBlock  />;
+  //    } else if (blockType === "images") {
+  //      return <ImageBlock />;
+  //    } else {
+  //      return null; // Можно вернуть что-то другое или ничего, в зависимости от ваших требований
+  //    }
+  //  };
 
   return (
     <div data-auto="home" className="flex min-h-screen flex-col items-center">
