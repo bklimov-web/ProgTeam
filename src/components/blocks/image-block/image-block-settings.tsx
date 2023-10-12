@@ -1,6 +1,5 @@
 "use client";
 
-import { Sidebar } from "components/shared/sidebar";
 import {
   Select,
   SelectContent,
@@ -9,7 +8,6 @@ import {
   SelectValue,
 } from "components/shared/ui/select";
 import { Input } from "components/shared/ui/input";
-import { useState } from "react";
 import { Button } from "components/shared/ui/button";
 import { useForm } from "react-hook-form";
 import { ChromePicker } from "react-color";
@@ -20,7 +18,6 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormDescription,
   FormMessage,
 } from "components/shared/ui/form";
 //import { toast } from "@/components/ui/use-toast";
@@ -49,18 +46,11 @@ const ImageBlockSettings = ({
   backgroundColor,
   divStyles,
 }: ImageProps) => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const [blockPickerColor, setBlockPickerColor] = useState(backgroundColor);
-  const [isBlur, setIsBlur] = useState(false);
-
-  const handleSelectChange = (event: any) => {
-    setSelectedValue(event.target.value);
-  };
-
-  //  const { register, handleSubmit } = useForm({ values: divStyles });
   const handleRegistration = (data: divStyles) => handleDivStyleChange(data);
 
-  const form = useForm<divStyles>();
+  const form = useForm<divStyles>({
+    defaultValues: divStyles,
+  });
 
   return (
     <Form {...form}>
@@ -74,11 +64,7 @@ const ImageBlockSettings = ({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Padding Top</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                {...form.register("paddingTop")}
-              >
+              <Select onValueChange={field.onChange} {...field}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select padding top" />
@@ -100,11 +86,7 @@ const ImageBlockSettings = ({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Padding Bottom</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                {...form.register("paddingBottom")}
-              >
+              <Select onValueChange={field.onChange} {...field}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select padding bottom" />
@@ -127,17 +109,12 @@ const ImageBlockSettings = ({
             <FormItem>
               <FormLabel>Background Color</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="background color"
-                  value={blockPickerColor}
-                  defaultValue={field.value}
-                  {...form.register("background")}
-                />
+                <Input placeholder="background color" {...field} />
               </FormControl>
               <ChromePicker
-                color={blockPickerColor}
-                onChange={(color) => {
-                  setBlockPickerColor(color.hex);
+                color={field.value}
+                onChange={(e) => {
+                  field.onChange(e.hex);
                 }}
               />
               <FormMessage />
