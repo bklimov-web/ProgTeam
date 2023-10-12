@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "../shared/ui/button";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Menu } from "lucide-react";
 import {
   Sheet,
@@ -17,39 +17,38 @@ const BLOCKS = [
   {
     id: "text",
     label: "Text",
-    onClick: () => undefined,
+    blockData: {
+      type: "TextBlockModel",
+      description: "Description",
+      title: "Title",
+      subtitle: "Subtitle",
+    },
   },
   {
     id: "images",
     label: "Images",
-    onClick: () => undefined,
+    blockData: {
+      type: "ImageBlockModel",
+      imageUrls: ["img1", "img2"],
+    },
   },
-  {
-    id: "other",
-    label: "Other",
-    onClick: () => undefined,
-  },
+  // {
+  //   id: "other",
+  //   label: "Other",
+  //   onClick: () => undefined,
+  // },
 ];
 
 type Props = {
-  createBlock: () => any;
+  handleCreateBlock: (blockData: any) => void;
 };
 
-const NewBlock: FC<Props> = ({ createBlock }) => {
-  const [open, setOpen] = useState(false);
-  const handleClickAll = () => {
-    setOpen(true);
-  };
-
-  const handleAddTextBlock = () => {
-    createBlock();
-  };
-
+const NewBlockPanel: FC<Props> = ({ handleCreateBlock }) => {
   return (
     <div className="flex justify-between gap-5 mt-[80px]">
       <Sheet>
         <SheetTrigger asChild>
-          <Button onClick={handleClickAll}>
+          <Button>
             <Menu className="pr-2" />
             All blocks
           </Button>
@@ -67,8 +66,12 @@ const NewBlock: FC<Props> = ({ createBlock }) => {
       </Sheet>
 
       <ul className="flex">
-        {BLOCKS.map(({ id, label, onClick }) => (
-          <Button onClick={handleAddTextBlock} variant={"blocks-list"} key={id}>
+        {BLOCKS.map(({ id, label, blockData }) => (
+          <Button
+            onClick={() => handleCreateBlock(blockData)}
+            variant={"blocks-list"}
+            key={id}
+          >
             {label}
           </Button>
         ))}
@@ -77,4 +80,4 @@ const NewBlock: FC<Props> = ({ createBlock }) => {
   );
 };
 
-export default NewBlock;
+export default NewBlockPanel;

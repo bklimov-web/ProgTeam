@@ -1,6 +1,6 @@
 import { FC } from "react";
 import BlockWrapper from "components/block-wrapper/block-wrapper";
-import { deleteBlock, updateBlock } from "./actions";
+import { deleteBlock, updateBlock } from "lib/actions/block-actions";
 
 export type TextBlockContentProps = {
   description: string;
@@ -9,22 +9,30 @@ export type TextBlockContentProps = {
 };
 
 type Props = {
-  content: TextBlockContentProps;
-  id: number;
-  projectId: number;
+  description: string;
+  subtitle: string;
+  title: string;
+  id: string;
+  projectId: string;
 };
 
-const TextBlock: FC<Props> = ({ content, id, projectId }) => {
-  const { description, title, subtitle } = content;
+const TextBlock: FC<Props> = ({
+  title,
+  subtitle,
+  description,
+  id,
+  projectId,
+}) => {
+  const content = { title, subtitle, description };
 
   const handleDelete = async () => {
     "use server";
-    await deleteBlock(id, projectId);
+    await deleteBlock(projectId, id);
   };
 
   const handleUpdate = async (values: any) => {
     "use server";
-    await updateBlock(values, id, projectId);
+    await updateBlock(id, values, "TextBlockModel");
   };
 
   return (
@@ -32,6 +40,7 @@ const TextBlock: FC<Props> = ({ content, id, projectId }) => {
       handleDelete={handleDelete}
       updateBlock={handleUpdate}
       content={content}
+      className="text-center py-10 bg-blue-100"
     >
       <div className="flex flex-col justify-center mx-auto w-[1200px] h-full">
         <p>{subtitle}</p>
