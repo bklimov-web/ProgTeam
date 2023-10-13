@@ -46,7 +46,7 @@ function TextBlockConfig({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-     <div className="flex">
+        <div className="flex">
           <Button className="w-[50%]" type="submit">
             Save
           </Button>
@@ -80,7 +80,7 @@ function TextBlockConfig({
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-              <Input {...field} />
+                <Input {...field} />
               </FormControl>
               <FormDescription>
                 This is your public display name.

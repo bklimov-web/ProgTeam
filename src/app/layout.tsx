@@ -1,3 +1,4 @@
+import React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
 // import Editor from 'ckeditor5-custom-build';
@@ -17,7 +18,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-
     <html lang="en">
       <body>{children}</body>
       {/* <body className={inter.className}>{children}</body> */}
