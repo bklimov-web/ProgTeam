@@ -15,8 +15,16 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+<<<<<<< Updated upstream
     "ckeditor5-custom-build": "file:./ckeditor5",
     "next": "13.4.19",
+=======
+    "axios": "^1.5.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.284.0",
+    "next": "^13.5.4",
+>>>>>>> Stashed changes
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -27,6 +35,13 @@
     "@babel/preset-env": "^7.22.15",
     "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.22.15",
+<<<<<<< Updated upstream
+=======
+    "@ckeditor/ckeditor5-build-balloon-block": "^40.0.0",
+    "@ckeditor/ckeditor5-react": "^6.1.0",
+    "@swc/core": "^1.3.85",
+    "@swc/jest": "^0.2.29",
+>>>>>>> Stashed changes
     "@testing-library/jest-dom": "^6.1.3",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.4",
