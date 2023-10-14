@@ -20,6 +20,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         "blocks-list":
           "rounded-none bg-background text-foreground border-r-[1px] border-y-[1px] border-border first:border-l-[1px] first:rounded-l-md last:rounded-r-md hover:bg-accent",
+        "blocks-list-vertical":
+          "w-full justify-start rounded-none bg-background text-foreground border-b hover:bg-accent",
       },
       size: {
         default: "h-10 px-4 py-2",
