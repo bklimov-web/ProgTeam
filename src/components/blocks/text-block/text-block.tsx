@@ -14,6 +14,7 @@ type Props = {
   title: string;
   id: string;
   projectId: string;
+  preview?: boolean;
 };
 
 const TextBlock: FC<Props> = ({
@@ -22,31 +23,29 @@ const TextBlock: FC<Props> = ({
   description,
   id,
   projectId,
+  preview = false,
 }) => {
   const content = { title, subtitle, description };
 
-  const handleDelete = async () => {
-    "use server";
-    await deleteBlock(projectId, id);
-  };
+  const Component = () => (
+    <div className="flex flex-col justify-center mx-auto w-screen h-full text-center py-10 bg-blue-100">
+      <p>{subtitle}</p>
+      <h1 className="text-3xl mt-10">{title}</h1>
+      <p className="mt-10">{description}</p>
+    </div>
+  );
 
-  const handleUpdate = async (values: any) => {
-    "use server";
-    await updateBlock(id, values, "TextBlockModel");
-  };
+  if (preview) {
+    return <Component />;
+  }
 
   return (
     <BlockWrapper
-      handleDelete={handleDelete}
-      updateBlock={handleUpdate}
+      handleDelete={deleteBlock(projectId, id)}
+      updateBlock={updateBlock(id, "TextBlockModel")}
       content={content}
-      className="text-center py-10 bg-blue-100"
     >
-      <div className="flex flex-col justify-center mx-auto w-[1200px] h-full">
-        <p>{subtitle}</p>
-        <h1 className="text-3xl mt-10">{title}</h1>
-        <p className="mt-10">{description}</p>
-      </div>
+      <Component />
     </BlockWrapper>
   );
 };

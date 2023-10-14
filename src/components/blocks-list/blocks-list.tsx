@@ -5,9 +5,10 @@ import { FC } from "react";
 type Props = {
   blocks: any[];
   projectId: string;
+  preview?: boolean;
 };
 
-const BlocksList: FC<Props> = ({ blocks, projectId }) => {
+const BlocksList: FC<Props> = ({ blocks, projectId, preview = false }) => {
   return (
     <section>
       {blocks.map((block) => {
@@ -23,11 +24,19 @@ const BlocksList: FC<Props> = ({ blocks, projectId }) => {
               title={title}
               description={description}
               subtitle={subtitle}
+              preview={preview}
             />
           );
         }
 
-        return <ImageBlock projectId={projectId} id={id} key={id} />;
+        return (
+          <ImageBlock
+            projectId={projectId}
+            id={id}
+            key={id}
+            preview={preview}
+          />
+        );
       })}
     </section>
   );

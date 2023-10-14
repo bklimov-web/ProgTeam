@@ -1,25 +1,25 @@
 import { BlockWrapper } from "components/block-wrapper";
 import { deleteBlock, updateBlock } from "lib/actions/block-actions";
+import { FC } from "react";
 
-const ImageBlock = ({ id, projectId }: { id: string; projectId: string }) => {
-  const handleDelete = async () => {
-    "use server";
-    await deleteBlock(projectId, id);
-  };
+type Props = { id: string; projectId: string; preview?: boolean };
 
-  const handleUpdate = async (values: any) => {
-    "use server";
-    await updateBlock(id, values, "ImageBlockModel");
-  };
+const ImageBlock: FC<Props> = ({ id, projectId, preview = false }) => {
+  const Component = () => (
+    <div className="w-screen text-center py-9 bg-red-100">Image block</div>
+  );
+
+  if (preview) {
+    return <Component />;
+  }
 
   return (
     <BlockWrapper
-      handleDelete={handleDelete}
-      updateBlock={handleUpdate}
+      handleDelete={deleteBlock(projectId, id)}
+      updateBlock={updateBlock(id, "ImageBlockModel")}
       content={{}}
-      className="text-center py-9 bg-red-100"
     >
-      <div>Image block</div>
+      <Component />
     </BlockWrapper>
   );
 };
