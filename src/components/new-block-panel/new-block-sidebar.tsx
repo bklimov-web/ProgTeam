@@ -28,7 +28,7 @@ const NewBlockSidebar: FC<Props> = ({ handleClickBlock }) => {
           <div className="flex items-center justify-between mb-4">
             <SheetTitle>Block library</SheetTitle>
             <SheetClose asChild>
-              <Button size={"icon"}>
+              <Button variant="ghost" size="icon">
                 <X />
               </Button>
             </SheetClose>
