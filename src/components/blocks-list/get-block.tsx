@@ -23,7 +23,7 @@ export const getBlock = (
         form: (
           <TextBlockForm
             updateBlock={updateBlock}
-            defaultValues={block.content}
+            defaultValues={block.content.toJSON()}
           />
         ),
       };
