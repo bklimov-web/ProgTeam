@@ -51,3 +51,36 @@ export const deleteBlock = async (projectId: string, id: string) => {
     throw error;
   }
 };
+
+export const moveBlockUp = async (projectId: string, id: string) => {
+  "use server";
+
+  try {
+    const project = await ProjectModel.findById(projectId);
+
+    if (!project) {
+      throw new Error("project not found");
+    }
+
+    const blockIndex = project.blocks.indexOf(id);
+
+    if (blockIndex === 0) return;
+
+    [project.blocks[blockIndex], project.blocks[blockIndex - 1]] = [
+      project.blocks[blockIndex - 1],
+      project.blocks[blockIndex],
+    ];
+
+    await project.save();
+
+    revalidatePath(`/project/${projectId}`);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+
+// export const moveBlockDown = async (projectId: string, id: string) => {
+  
+// };
