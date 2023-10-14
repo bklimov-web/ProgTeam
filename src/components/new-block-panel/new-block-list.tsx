@@ -7,22 +7,30 @@ const BLOCKS = [
   {
     id: "text",
     label: "Text",
-    onClick: () => undefined,
+    blockData: {
+      type: "TextBlockModel",
+      description: "Description",
+      title: "Title",
+      subtitle: "Subtitle",
+    },
   },
   {
     id: "images",
     label: "Images",
-    onClick: () => undefined,
+    blockData: {
+      type: "ImageBlockModel",
+      imageUrls: ["img1", "img2"],
+    },
   },
-  {
-    id: "other",
-    label: "Other",
-    onClick: () => undefined,
-  },
+  // {
+  //   id: "other",
+  //   label: "Other",
+  //   onClick: () => undefined,
+  // },
 ];
 
 type Props = {
-  handleClickBlock: () => any;
+  handleClickBlock: (blockData: any) => any;
   blockVariant: "blocks-list" | "blocks-list-vertical";
 };
 
@@ -34,9 +42,9 @@ const NewBlockList: FC<Props> = ({ handleClickBlock, blockVariant }) => {
 
   return (
     <ul className={listClassName}>
-      {BLOCKS.map(({ id, label }) => (
+      {BLOCKS.map(({ id, label, blockData }) => (
         <li key={id}>
-          <Button onClick={handleClickBlock} variant={blockVariant}>
+          <Button onClick={() => handleClickBlock(blockData)} variant={blockVariant}>
             {label}
           </Button>
         </li>

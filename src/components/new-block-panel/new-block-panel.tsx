@@ -5,23 +5,19 @@ import NewBlockSidebar from "./new-block-sidebar";
 import NewBlockList from "./new-block-list";
 
 type Props = {
-  createBlock: () => any;
+  handleCreateBlock: (blockData: any) => void;
 };
 
-const NewBlock: FC<Props> = ({ createBlock }) => {
-  const handleAddTextBlock = () => {
-    createBlock();
-  };
-
+const NewBlockPanel: FC<Props> = ({ handleCreateBlock }) => {
   return (
     <div className="flex justify-between gap-5 mt-[80px]">
-      <NewBlockSidebar handleClickBlock={handleAddTextBlock} />
+      <NewBlockSidebar handleClickBlock={handleCreateBlock} />
       <NewBlockList
         blockVariant="blocks-list"
-        handleClickBlock={handleAddTextBlock}
+        handleClickBlock={handleCreateBlock}
       />
     </div>
   );
 };
 
-export default NewBlock;
+export default NewBlockPanel;

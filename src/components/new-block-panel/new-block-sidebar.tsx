@@ -8,14 +8,14 @@ import { SheetClose, SheetTitle } from "components/shared/ui/sheet";
 import NewBlockList from "./new-block-list";
 
 type Props = {
-  handleClickBlock: () => any;
+  handleClickBlock: (blockData: any) => void
 };
 
 const NewBlockSidebar: FC<Props> = ({ handleClickBlock }) => {
   const [open, setOpen] = useState(false);
 
-  const handleClickBlockAndClose = () => {
-    handleClickBlock();
+  const handleClickBlockAndClose = (blockData: any) => {
+    handleClickBlock(blockData);
     setOpen(false);
   };
 

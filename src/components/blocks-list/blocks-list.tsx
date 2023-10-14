@@ -1,26 +1,33 @@
-import { Block } from "@prisma/client";
+import { ImageBlock } from "components/blocks/image-block";
 import TextBlock from "components/blocks/text-block";
 import { FC } from "react";
 
 type Props = {
-  blocks: Block[];
-  projectId: number;
+  blocks: any[];
+  projectId: string;
 };
 
 const BlocksList: FC<Props> = ({ blocks, projectId }) => {
   return (
     <section>
-      {blocks.map(({ description, title, subtitle, id }) => {
-        const content = { description, subtitle, title, id };
+      {blocks.map((block) => {
+        const id = block._id.toString();
+        if (block.type === "TextBlockModel") {
+          const { title, subtitle, description } = block;
 
-        return (
-          <TextBlock
-            key={id}
-            projectId={+projectId}
-            id={+id}
-            content={content}
-          />
-        );
+          return (
+            <TextBlock
+              key={id}
+              projectId={projectId}
+              id={id}
+              title={title}
+              description={description}
+              subtitle={subtitle}
+            />
+          );
+        }
+
+        return <ImageBlock projectId={projectId} id={id} key={id} />;
       })}
     </section>
   );
