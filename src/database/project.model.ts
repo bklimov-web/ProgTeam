@@ -9,13 +9,17 @@ const blockSchema = new Schema(
 );
 
 const textBlockSchema = new Schema({
-  title: String,
-  subtitle: String,
-  description: String,
+  content: {
+    title: String,
+    subtitle: String,
+    description: String,
+  },
 });
 
 const imageBlockSchema = new Schema({
-  imageUrls: [String],
+  content: {
+    imageUrls: [String],
+  },
 });
 
 const projectSchema = new Schema(

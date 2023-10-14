@@ -24,7 +24,7 @@ export const updateBlock = (id: string, type: string) => async (data: any) => {
   try {
     const newBlock = await BlockModel.findOneAndUpdate(
       { _id: id, type },
-      data,
+      { content: data },
       { new: true },
     );
 

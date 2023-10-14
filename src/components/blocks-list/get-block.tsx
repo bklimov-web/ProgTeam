@@ -1,19 +1,38 @@
 import { ImageBlock } from "components/blocks/image-block";
+import ImageBlockForm from "components/blocks/image-block/image-block-form";
 import TextBlock from "components/blocks/text-block";
+import TextBlockForm from "components/blocks/text-block/text-block-form";
+import { ReactNode } from "react";
 
-export const getBlock = (block: any) => {
+export const getBlock = (
+  block: any,
+  updateBlock: any,
+): { component: ReactNode; form: ReactNode } => {
   switch (block.type) {
     case "TextBlockModel":
-      return (
-        <TextBlock
-          title={block.title}
-          description={block.description}
-          subtitle={block.subtitle}
-        />
-      );
+      const { title, description, subtitle } = block.content;
+
+      return {
+        component: (
+          <TextBlock
+            title={title}
+            description={description}
+            subtitle={subtitle}
+          />
+        ),
+        form: (
+          <TextBlockForm
+            updateBlock={updateBlock}
+            defaultValues={block.content}
+          />
+        ),
+      };
     case "ImageBlockModel":
-      return <ImageBlock />;
+      return {
+        component: <ImageBlock />,
+        form: <ImageBlockForm />,
+      };
     default:
-      return null;
+      return { component: null, form: null };
   }
 };

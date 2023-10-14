@@ -19,17 +19,21 @@ const BLOCKS = [
     label: "Text",
     blockData: {
       type: "TextBlockModel",
-      description: "Description",
-      title: "Title",
-      subtitle: "Subtitle",
+      content: {
+        description: "Description",
+        title: "Title",
+        subtitle: "Subtitle",
+      },
     },
   },
   {
     id: "images",
     label: "Images",
     blockData: {
+      content: {
+        imageUrls: ["img1", "img2"],
+      },
       type: "ImageBlockModel",
-      imageUrls: ["img1", "img2"],
     },
   },
   // {
