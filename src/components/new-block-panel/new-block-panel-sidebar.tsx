@@ -5,13 +5,13 @@ import { FC, useState } from "react";
 import { X, Menu } from "lucide-react";
 import { Sidebar } from "components/shared/sidebar";
 import { SheetClose, SheetTitle } from "components/shared/ui/sheet";
-import NewBlockList from "./new-block-list";
+import NewBlockList from "./new-block-panel-list";
 
 type Props = {
   handleClickBlock: (blockData: any) => void
 };
 
-const NewBlockSidebar: FC<Props> = ({ handleClickBlock }) => {
+const NewBlockPanelSidebar: FC<Props> = ({ handleClickBlock }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickBlockAndClose = (blockData: any) => {
@@ -49,4 +49,4 @@ const NewBlockSidebar: FC<Props> = ({ handleClickBlock }) => {
   );
 };
 
-export default NewBlockSidebar;
+export default NewBlockPanelSidebar;

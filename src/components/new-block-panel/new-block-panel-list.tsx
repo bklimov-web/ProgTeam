@@ -34,7 +34,7 @@ type Props = {
   blockVariant: "blocks-list" | "blocks-list-vertical";
 };
 
-const NewBlockList: FC<Props> = ({ handleClickBlock, blockVariant }) => {
+const NewBlockPanelList: FC<Props> = ({ handleClickBlock, blockVariant }) => {
   const listClassName = {
     "blocks-list": "flex",
     "blocks-list-vertical": "flex flex-col",
@@ -53,4 +53,4 @@ const NewBlockList: FC<Props> = ({ handleClickBlock, blockVariant }) => {
   );
 };
 
-export default NewBlockList;
+export default NewBlockPanelList;
