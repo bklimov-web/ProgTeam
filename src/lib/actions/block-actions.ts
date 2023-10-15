@@ -5,7 +5,9 @@ export const createBlock = async (projectId: string, data: any) => {
   "use server";
 
   try {
-    const newBlock = await BlockModel.create(data);
+    const createdData = { ...data, disabled: false };
+
+    const newBlock = await BlockModel.create(createdData);
 
     await ProjectModel.findByIdAndUpdate(projectId, {
       $push: { blocks: newBlock._id },
@@ -130,3 +132,24 @@ export const moveBlockDown = async (projectId: string, id: string) => {
     throw error;
   }
 };
+
+export const toggleDisableBlock = async (id: string) => {
+  "use server";
+
+  try {
+    const block = await BlockModel.findById(id);
+
+    if (!block) {
+      throw new Error("Block not found");
+    }
+
+    block.disabled = !block.disabled;
+    await block.save();
+
+    revalidatePath(`/project/:id`);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+

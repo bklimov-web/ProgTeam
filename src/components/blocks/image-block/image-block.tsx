@@ -4,10 +4,13 @@ import {
   duplicateBlock,
   moveBlockDown,
   moveBlockUp,
+  toggleDisableBlock,
   updateBlock,
 } from "lib/actions/block-actions";
 
-const ImageBlock = ({ id, projectId }: { id: string; projectId: string }) => {
+const ImageBlock = ({ id, projectId, disabled }: { id: string; projectId: string, disabled: boolean }) => {
+  const content = { disabled };
+
   const handleDelete = async () => {
     "use server";
     await deleteBlock(projectId, id);
@@ -32,6 +35,11 @@ const ImageBlock = ({ id, projectId }: { id: string; projectId: string }) => {
     "use server";
     await moveBlockDown(projectId, id);
   };
+  
+  const handleToggleDisable = async () => {
+    "use server";
+    await toggleDisableBlock(id);
+  };
 
   return (
     <BlockWrapper
@@ -40,7 +48,8 @@ const ImageBlock = ({ id, projectId }: { id: string; projectId: string }) => {
       handleDuplicate={handleDuplicate}
       handleMoveUp={handleMoveUp}
       handleMoveDown={handleMoveDown}
-      content={{}}
+      handleToggleDisable={handleToggleDisable}
+      content={content}
       className="text-center py-9 bg-red-100"
     >
       <div>Image block</div>

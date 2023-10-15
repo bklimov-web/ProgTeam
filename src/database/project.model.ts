@@ -9,12 +9,14 @@ const blockSchema = new Schema(
 );
 
 const textBlockSchema = new Schema({
+  disabled: Boolean,
   title: String,
   subtitle: String,
   description: String,
 });
 
 const imageBlockSchema = new Schema({
+  disabled: Boolean,
   imageUrls: [String],
 });
 

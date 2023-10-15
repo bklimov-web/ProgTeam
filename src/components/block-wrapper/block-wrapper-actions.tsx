@@ -1,21 +1,24 @@
 "use client";
 
 import { Button } from "components/shared/ui/button";
-import { Trash2, ArrowDown, ArrowUp, Copy } from "lucide-react";
-import { ReactNode } from "react";
+import { Trash2, ArrowDown, ArrowUp, Copy, Power, PowerOff } from "lucide-react";
 
 type Props = {
+  disabled: boolean;
   handleDelete: () => void;
   handleDuplicate: () => void;
   handleMoveUp: () => void;
   handleMoveDown: () => void;
+  handleToggleDisable: () => void;
 };
 
 const BlockWrapperActions = ({
+  disabled,
   handleDelete,
   handleDuplicate,
   handleMoveUp,
   handleMoveDown,
+  handleToggleDisable,
 }: Props) => {
   const actions = [
     {
@@ -27,6 +30,11 @@ const BlockWrapperActions = ({
       Icon: Copy,
       handler: () => handleDuplicate(),
       key: "duplicate",
+    },
+    {
+      Icon: disabled ? Power : PowerOff,
+      handler: () => handleToggleDisable(),
+      key: "toggleDisable",
     },
     {
       Icon: ArrowUp,

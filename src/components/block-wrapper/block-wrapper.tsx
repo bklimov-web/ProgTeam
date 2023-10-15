@@ -2,9 +2,10 @@
 
 import { Sidebar } from "components/shared/sidebar";
 import TextBlockForm from "components/blocks/text-block/text-block-form";
+import PlugBlock from "components/blocks/plug-block";
 import BlockWrapperActions from "./block-wrapper-actions";
 import { Button } from "components/shared/ui/button";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
 import { ReactNode } from "react";
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
   handleMoveUp: () => void;
   handleMoveDown: () => void;
   handleDuplicate: () => void;
+  handleToggleDisable: () => void;
   updateBlock: (values: any) => void;
   children: ReactNode;
   content: any;
@@ -24,30 +26,37 @@ const BlockWrapper = ({
   handleMoveUp,
   handleMoveDown,
   handleDuplicate,
+  handleToggleDisable,
   updateBlock,
   content,
   className,
 }: Props) => {
+  const { disabled } = content;
+
   return (
     <div className={`relative group align-middle h-fit w-screen ${className}`}>
-      <Sidebar
-        content={
-          <TextBlockForm updateBlock={updateBlock} defaultValues={content} />
-        }
-        trigger={
-          <Button className="absolute left-[100px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Settings
-          </Button>
-        }
-      />
+      {!disabled && (
+        <Sidebar
+          content={
+            <TextBlockForm updateBlock={updateBlock} defaultValues={content} />
+          }
+          trigger={
+            <Button className="absolute left-[100px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Settings
+            </Button>
+          }
+        />
+      )}
 
-      {children}
+      {content.disabled ? PlugBlock() : children}
 
       <BlockWrapperActions
+        disabled={disabled}
         handleDelete={handleDelete}
         handleMoveUp={handleMoveUp}
         handleMoveDown={handleMoveDown}
         handleDuplicate={handleDuplicate}
+        handleToggleDisable={handleToggleDisable}
       />
 
       <div className="flex absolute -bottom-[1px] left-0 z-10 justify-center items-center border-dashed w-screen border-b-[2px] h-[1px] border-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">

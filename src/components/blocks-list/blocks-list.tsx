@@ -13,13 +13,14 @@ const BlocksList: FC<Props> = ({ blocks, projectId }) => {
       {blocks.map((block) => {
         const id = block._id.toString();
         if (block.type === "TextBlockModel") {
-          const { title, subtitle, description } = block;
+          const { title, subtitle, description, disabled } = block;
 
           return (
             <TextBlock
               key={id}
               projectId={projectId}
               id={id}
+              disabled={disabled}
               title={title}
               description={description}
               subtitle={subtitle}
@@ -27,7 +28,7 @@ const BlocksList: FC<Props> = ({ blocks, projectId }) => {
           );
         }
 
-        return <ImageBlock projectId={projectId} id={id} key={id} />;
+        return <ImageBlock projectId={projectId} id={id} disabled={block.disabled} key={id} />;
       })}
     </section>
   );

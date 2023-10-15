@@ -5,6 +5,7 @@ import {
   duplicateBlock,
   moveBlockDown,
   moveBlockUp,
+  toggleDisableBlock,
   updateBlock,
 } from "lib/actions/block-actions";
 
@@ -18,6 +19,7 @@ type Props = {
   description: string;
   subtitle: string;
   title: string;
+  disabled: boolean;
   id: string;
   projectId: string;
 };
@@ -26,10 +28,11 @@ const TextBlock: FC<Props> = ({
   title,
   subtitle,
   description,
+  disabled,
   id,
   projectId,
 }) => {
-  const content = { title, subtitle, description };
+  const content = { title, subtitle, description, disabled };
 
   const handleDelete = async () => {
     "use server";
@@ -56,6 +59,11 @@ const TextBlock: FC<Props> = ({
     await moveBlockDown(projectId, id);
   };
 
+  const handleToggleDisable = async () => {
+    "use server";
+    await toggleDisableBlock(id);
+  };
+
   return (
     <BlockWrapper
       handleDelete={handleDelete}
@@ -63,6 +71,7 @@ const TextBlock: FC<Props> = ({
       handleDuplicate={handleDuplicate}
       handleMoveUp={handleMoveUp}
       handleMoveDown={handleMoveDown}
+      handleToggleDisable={handleToggleDisable}
       content={content}
       className="text-center py-10 bg-blue-100"
     >
