@@ -1,15 +1,12 @@
 import { BlockModel, ProjectModel } from "database/project.model";
-import mongoose from "mongoose";
 import { revalidatePath } from "next/cache";
 
 export const createBlock = async (projectId: string, data: any) => {
   "use server";
 
   try {
-    const id = new mongoose.Types.ObjectId(projectId);
-
     const newBlock = await BlockModel.create({
-      projectId: id,
+      projectId,
       ...data,
     });
 

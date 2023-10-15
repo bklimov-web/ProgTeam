@@ -33,13 +33,14 @@ export async function getProjectById(id: string) {
   }
 }
 
-export const createProject = async (formData: FormData) => {
+export const createProject = async (formData: FormData, author: string) => {
   try {
     connectToDatabase();
     const name = formData.get("name")?.toString();
 
     await ProjectModel.create({
       name,
+      author,
     });
 
     revalidatePath("/");

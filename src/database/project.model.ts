@@ -28,6 +28,7 @@ const projectSchema = new Schema(
       type: String,
       required: false,
     },
+    author: { type: Schema.Types.ObjectId, ref: "User" },
     blocks: [{ type: Schema.Types.ObjectId, ref: "BlockModel" }],
   },
   {
