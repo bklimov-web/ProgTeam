@@ -1,11 +1,17 @@
 import { BlockModel, ProjectModel } from "database/project.model";
+import mongoose from "mongoose";
 import { revalidatePath } from "next/cache";
 
 export const createBlock = async (projectId: string, data: any) => {
   "use server";
 
   try {
-    const newBlock = await BlockModel.create(data);
+    const id = new mongoose.Types.ObjectId(projectId);
+
+    const newBlock = await BlockModel.create({
+      projectId: id,
+      ...data,
+    });
 
     await ProjectModel.findByIdAndUpdate(projectId, {
       $push: { blocks: newBlock._id },
@@ -22,11 +28,7 @@ export const updateBlock = async (id: string, data: any, type: string) => {
   "use server";
 
   try {
-    const newBlock = await BlockModel.findOneAndUpdate(
-      { _id: id, type },
-      data,
-      { new: true },
-    );
+    await BlockModel.findOneAndUpdate({ _id: id, type }, data, { new: true });
 
     revalidatePath("/project/:id");
   } catch (error) {

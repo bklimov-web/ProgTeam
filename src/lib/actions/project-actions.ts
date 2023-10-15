@@ -51,7 +51,9 @@ export const createProject = async (formData: FormData) => {
 
 export const deleteProject = async (id: string) => {
   try {
-    await ProjectModel.findOneAndDelete({ _id: id });
+    const project = await ProjectModel.findOneAndDelete({ _id: id });
+
+    await BlockModel.deleteMany({ projectId: project._id });
 
     revalidatePath("/");
   } catch (error) {

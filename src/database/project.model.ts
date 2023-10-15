@@ -1,7 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
 const blockSchema = new Schema(
-  { type: String },
+  {
+    type: String,
+    projectId: { type: Schema.Types.ObjectId, ref: "ProjectModel" },
+  },
   {
     discriminatorKey: "type",
     timestamps: true,
