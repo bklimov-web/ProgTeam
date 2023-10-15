@@ -32,9 +32,9 @@ const BlockWrapper = ({
   className,
 }: Props) => {
   const { disabled } = content;
-
+  
   return (
-    <div className={`relative group align-middle h-fit w-screen ${className}`}>
+    <div className={`relative group align-middle h-fit w-screen ${disabled ? '' :  className}`}>
       {!disabled && (
         <Sidebar
           content={
