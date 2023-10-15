@@ -2,7 +2,7 @@
 
 import { Sidebar } from "components/shared/sidebar";
 import TextBlockForm from "components/blocks/text-block/text-block-form";
-import BlockWrapperActions from './block-wrapper-actions'
+import BlockWrapperActions from "./block-wrapper-actions";
 import { Button } from "components/shared/ui/button";
 import { Plus, Trash2 } from "lucide-react";
 import { ReactNode } from "react";
@@ -10,6 +10,8 @@ import { ReactNode } from "react";
 type Props = {
   handleDelete: () => void;
   handleMoveUp: () => void;
+  handleMoveDown: () => void;
+  handleDuplicate: () => void;
   updateBlock: (values: any) => void;
   children: ReactNode;
   content: any;
@@ -20,6 +22,8 @@ const BlockWrapper = ({
   children,
   handleDelete,
   handleMoveUp,
+  handleMoveDown,
+  handleDuplicate,
   updateBlock,
   content,
   className,
@@ -39,7 +43,12 @@ const BlockWrapper = ({
 
       {children}
 
-      <BlockWrapperActions handleDelete={handleDelete} handleMoveUp={handleMoveUp}/>
+      <BlockWrapperActions
+        handleDelete={handleDelete}
+        handleMoveUp={handleMoveUp}
+        handleMoveDown={handleMoveDown}
+        handleDuplicate={handleDuplicate}
+      />
 
       <div className="flex absolute -bottom-[1px] left-0 z-10 justify-center items-center border-dashed w-screen border-b-[2px] h-[1px] border-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <div className="flex justify-center items-center h-[30px] w-[30px] bg-foreground rounded-full">

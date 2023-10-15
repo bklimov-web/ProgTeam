@@ -52,6 +52,28 @@ export const deleteBlock = async (projectId: string, id: string) => {
   }
 };
 
+export const duplicateBlock = async (projectId: string, id: string) => {
+  "use server";
+
+  try {
+    const blockToDuplicate = await BlockModel.findById(id);
+
+    if (!blockToDuplicate) {
+      throw new Error("Block not found");
+    }
+
+    const duplicatedBlockData = {
+      ...blockToDuplicate.toObject(),
+      _id: undefined,
+    };
+
+    await createBlock(projectId, duplicatedBlockData);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export const moveBlockUp = async (projectId: string, id: string) => {
   "use server";
 
@@ -73,14 +95,38 @@ export const moveBlockUp = async (projectId: string, id: string) => {
 
     await project.save();
 
-    revalidatePath(`/project/${projectId}`);
+    revalidatePath(`/project/:id`);
   } catch (error) {
     console.log(error);
     throw error;
   }
 };
 
+export const moveBlockDown = async (projectId: string, id: string) => {
+  "use server";
 
-// export const moveBlockDown = async (projectId: string, id: string) => {
-  
-// };
+  try {
+    const project = await ProjectModel.findById(projectId);
+
+    if (!project) {
+      throw new Error("project not found");
+    }
+
+    const blockIndex = project.blocks.indexOf(id);
+    const lastBlockIndex = project.blocks.length - 1;
+
+    if (blockIndex === lastBlockIndex) return;
+
+    [project.blocks[blockIndex], project.blocks[blockIndex + 1]] = [
+      project.blocks[blockIndex + 1],
+      project.blocks[blockIndex],
+    ];
+
+    await project.save();
+
+    revalidatePath(`/project/:id`);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

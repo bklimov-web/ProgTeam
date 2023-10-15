@@ -1,6 +1,12 @@
 import { FC } from "react";
 import BlockWrapper from "components/block-wrapper/block-wrapper";
-import { deleteBlock, updateBlock } from "lib/actions/block-actions";
+import {
+  deleteBlock,
+  duplicateBlock,
+  moveBlockDown,
+  moveBlockUp,
+  updateBlock,
+} from "lib/actions/block-actions";
 
 export type TextBlockContentProps = {
   description: string;
@@ -35,10 +41,28 @@ const TextBlock: FC<Props> = ({
     await updateBlock(id, values, "TextBlockModel");
   };
 
+  const handleDuplicate = async () => {
+    "use server";
+    await duplicateBlock(projectId, id);
+  };
+
+  const handleMoveUp = async () => {
+    "use server";
+    await moveBlockUp(projectId, id);
+  };
+
+  const handleMoveDown = async () => {
+    "use server";
+    await moveBlockDown(projectId, id);
+  };
+
   return (
     <BlockWrapper
       handleDelete={handleDelete}
       updateBlock={handleUpdate}
+      handleDuplicate={handleDuplicate}
+      handleMoveUp={handleMoveUp}
+      handleMoveDown={handleMoveDown}
       content={content}
       className="text-center py-10 bg-blue-100"
     >
