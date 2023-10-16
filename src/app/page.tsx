@@ -14,6 +14,7 @@ export default async function home() {
 
   const handleCreateProject = async (formData: FormData) => {
     "use server";
+
     if (id) {
       await createProject(formData, id);
     }

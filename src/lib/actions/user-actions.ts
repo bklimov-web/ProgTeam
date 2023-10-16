@@ -8,7 +8,7 @@ import {
   DeleteUserParams,
   UpdateUserParams,
 } from "./shared.types";
-import { ProjectModel } from "database/project.model";
+import { BlockModel, ProjectModel } from "database/project.model";
 
 export async function getUserById(params: any) {
   try {
@@ -67,7 +67,14 @@ export async function deleteUser(params: DeleteUserParams) {
       throw new Error("User not found");
     }
 
+    const projects = await ProjectModel.find({ author: user._id });
+
+    for (const project of projects) {
+      await BlockModel.deleteMany({ projectId: project._id });
+    }
+
     await ProjectModel.deleteMany({ author: user._id });
+
     const deletedUser = await User.findByIdAndDelete(user._id);
 
     return deletedUser;
