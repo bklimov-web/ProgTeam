@@ -5,7 +5,10 @@ export const createBlock = async (projectId: string, data: any) => {
   "use server";
 
   try {
-    const newBlock = await BlockModel.create(data);
+    const newBlock = await BlockModel.create({
+      projectId,
+      ...data,
+    });
 
     await ProjectModel.findByIdAndUpdate(projectId, {
       $push: { blocks: newBlock._id },
@@ -22,7 +25,7 @@ export const updateBlock = (id: string, type: string) => async (data: any) => {
   "use server";
 
   try {
-    const newBlock = await BlockModel.findOneAndUpdate(
+    BlockModel.findOneAndUpdate(
       { _id: id, type },
       { content: data },
       { new: true },
