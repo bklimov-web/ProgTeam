@@ -1,11 +1,6 @@
 import React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
-// import Editor from 'ckeditor5-custom-build';
-// import CKEditor from './ckeditor'
-// import { Inter } from "next/font/google";
-
-// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",

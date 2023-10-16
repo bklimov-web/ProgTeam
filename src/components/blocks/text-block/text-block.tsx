@@ -33,7 +33,6 @@ const TextBlock: FC<Props> = ({
 
   const handleUpdate = async (values: any) => {
     "use server";
-
     await updateBlock(id, values, "TextBlockModel");
   };
 
@@ -42,9 +41,10 @@ const TextBlock: FC<Props> = ({
       handleDelete={handleDelete}
       updateBlock={handleUpdate}
       content={content}
+      className="text-center py-10 bg-blue-100"
     >
       <div className="flex flex-col justify-center mx-auto w-[1200px] h-full">
-        <p className="text-center text-3xl">
+        <p>
           <Editor content={subtitle} />
         </p>
         <h1 className="text-3xl mt-10">

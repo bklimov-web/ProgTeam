@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-// import BalloonBlockEditor from "../../ckeditor5/build/ckeditor";
 import BalloonBlockEditor from "@ckeditor/ckeditor5-build-balloon-block";
 
 interface CKeditorProps {
@@ -9,7 +8,6 @@ interface CKeditorProps {
   name: string;
   value: string;
 }
-
 export default function CKeditor({
   onChange,
   editorLoaded,
