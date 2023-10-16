@@ -22,6 +22,7 @@ const UserSchema = new Schema({
   picture: { type: String, required: true },
   location: { type: String },
   joinedAt: { type: Date, default: Date.now },
+  projects: [{ type: Schema.Types.ObjectId, ref: "ProjectModel" }],
 });
 
 const User = models.User || model("User", UserSchema);
