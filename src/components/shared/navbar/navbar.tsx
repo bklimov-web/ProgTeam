@@ -8,7 +8,7 @@ const Navbar = () => {
   const params = useParams();
 
   return (
-    <div className="w-screen h-[60px] shadow-lg ">
+    <div className="w-screen h-[60px] shadow-lg">
       <div className="w-[1200px] h-full mx-auto flex justify-between items-center">
         {!!params.projectId && (
           <Button asChild>

@@ -21,11 +21,15 @@ export const createBlock = async (projectId: string, data: any) => {
   }
 };
 
-export const updateBlock = async (id: string, data: any, type: string) => {
+export const updateBlock = (id: string, type: string) => async (data: any) => {
   "use server";
 
   try {
-    await BlockModel.findOneAndUpdate({ _id: id, type }, data, { new: true });
+    BlockModel.findOneAndUpdate(
+      { _id: id, type },
+      { content: data },
+      { new: true },
+    );
 
     revalidatePath("/project/:id");
   } catch (error) {
@@ -34,7 +38,7 @@ export const updateBlock = async (id: string, data: any, type: string) => {
   }
 };
 
-export const deleteBlock = async (projectId: string, id: string) => {
+export const deleteBlock = (projectId: string, id: string) => async () => {
   "use server";
 
   try {
