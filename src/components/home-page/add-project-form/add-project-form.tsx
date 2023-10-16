@@ -19,7 +19,7 @@ const AddProjectForm: FC<Props> = ({ createNewProject }) => {
         required
       />
       <Button className="mt-4" type="submit">
-        Create new project!
+        Create new project
       </Button>
     </form>
   );
