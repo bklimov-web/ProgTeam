@@ -11,6 +11,11 @@ import { Input } from "components/shared/ui/input";
 import { Button } from "components/shared/ui/button";
 import { useForm } from "react-hook-form";
 import { ChromePicker } from "react-color";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "components/shared/ui/popover";
 
 import {
   Form,
@@ -108,15 +113,22 @@ const ImageBlockSettings = ({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Background Color</FormLabel>
-              <FormControl>
-                <Input placeholder="background color" {...field} />
-              </FormControl>
-              <ChromePicker
-                color={field.value}
-                onChange={(e) => {
-                  field.onChange(e.hex);
-                }}
-              />
+              <Popover>
+                <PopoverTrigger>
+                  <FormControl>
+                    <Input placeholder="background color" {...field} />
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <ChromePicker
+                    color={field.value}
+                    onChange={(e) => {
+                      field.onChange(e.hex);
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
+
               <FormMessage />
             </FormItem>
           )}

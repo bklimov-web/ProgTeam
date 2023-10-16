@@ -5,6 +5,8 @@ import ImageBlockSettings from "./image-block-settings";
 import { Button } from "components/shared/ui/button";
 import ImageContentSettings from "./image-content-settings";
 import { Sidebar } from "components/shared/sidebar";
+import { Dialog, DialogTrigger } from "components/shared/ui/dialog";
+import { AspectRatio } from "components/shared/ui/aspect-ratio";
 
 interface img {
   id: number;
@@ -29,19 +31,19 @@ type ImageProps = {
 
 const imageData = [
   {
-    id: 1,
+    id: 0,
     alt: "Img1",
     title: "Img1",
     src: "http://static8.depositphotos.com/1146092/920/i/450/depositphotos_9202690-Dog-sleep.jpg",
   },
   {
-    id: 2,
+    id: 1,
     alt: "Img2",
     title: "Img2",
     src: "http://st.depositphotos.com/1030020/3490/i/450/depositphotos_34909067-German-Shepherd-Dog-and-cat-together.jpg",
   },
   {
-    id: 3,
+    id: 2,
     alt: "Img3",
     title: "Img3",
     src: "http://static9.depositphotos.com/1032440/1111/i/450/depositphotos_11110118-Little-dogs-in-the-park.jpg",
@@ -50,8 +52,7 @@ const imageData = [
 
 const ImageBlock: FC<ImageProps> = (props) => {
   const [images, setImages] = useState(imageData);
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(-1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(-1);
   const defaultStyles = {
     paddingBottom: "10px",
     paddingTop: "10px",
@@ -63,45 +64,50 @@ const ImageBlock: FC<ImageProps> = (props) => {
     setDivStyles(data);
   };
 
-  console.log(divStyles);
-
-  const openModal = (id: number) => {
-    setSelectedImageIndex(id);
-    setIsModalOpen(true);
-  };
-
-  const handleImageUpload = (newImage: any) => {
-    console.log(newImage);
+  const handleImageUpload = (index: number) => (newImage: any) => {
+    //  console.log(selectedImageIndex);
+    console.log(index);
+    console.log(newImage[0].path);
     const updatedImages = [...imageData];
-    updatedImages[selectedImageIndex].src = URL.createObjectURL(newImage);
+    //  console.log(updatedImages[selectedImageIndex]);
+    console.log(URL.createObjectURL(newImage[0]));
+    updatedImages[index].src = URL.createObjectURL(newImage[0]);
+
     setImages(updatedImages);
-    setIsModalOpen(false);
   };
 
   const renderImages = useCallback(() => {
-    return images.map((image) => (
-      <img
-        className="w-[300px] h-auto"
-        key={image.id}
-        src={image.src}
-        alt={image.alt}
-        onClick={() => openModal(image.id)}
-      />
-    ));
+    return (
+      <>
+        {images.map((image, index) => (
+          <Dialog key={index}>
+            <DialogTrigger
+              className="w-[300px] h-[300px]"
+              //  onClick={() => setSelectedImageIndex(index + 1)}
+            >
+              {/*<AspectRatio ratio={16 / 9} className="h-full w-full">*/}
+              <img
+                className="w-[100%] h-[100%] object-cover"
+                src={image.src}
+                alt={image.alt}
+                //key={image.id}
+              />
+              {/*</AspectRatio>*/}
+            </DialogTrigger>
+            <ImageUploadModal onImageUpload={handleImageUpload(index)} />
+          </Dialog>
+        ))}
+      </>
+    );
   }, [images]);
 
   return (
     <div style={divStyles} id="block-id" className="mx-auto h-full px-5">
       <div>
-        <div className="flex justify-between gap-5">{renderImages()}</div>
+        <div className="flex justify-between gap-5 w-[1000px]">
+          {renderImages()}
+        </div>
       </div>
-      {isModalOpen && (
-        <ImageUploadModal
-          isOpen={isModalOpen}
-          onRequestClose={() => setIsModalOpen(false)}
-          onImageUpload={handleImageUpload}
-        />
-      )}
       <Sidebar
         content={<ImageContentSettings data={imageData} />}
         trigger={<Button>Content Settings</Button>}
@@ -122,3 +128,7 @@ const ImageBlock: FC<ImageProps> = (props) => {
 };
 
 export default ImageBlock;
+
+// model IamgeBlock {
+//id: number
+//}
