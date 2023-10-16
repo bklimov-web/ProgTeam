@@ -18,7 +18,7 @@ const Project = async ({
   };
 
   return (
-    <div data-auto="home" className="flex min-h-screen flex-col items-center">
+    <main className="relative flex min-h-screen flex-col items-center">
       <BlocksList blocks={blocks} projectId={projectId} />
 
       <NewBlockPanel handleCreateBlock={handleCreateBlock} />
@@ -26,7 +26,7 @@ const Project = async ({
       <Link href="/" className="absolute left-4 top-4">
         <MoveLeft />
       </Link>
-    </div>
+    </main>
   );
 };
 
