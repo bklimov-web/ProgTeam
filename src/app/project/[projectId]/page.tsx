@@ -1,12 +1,16 @@
+<<<<<<< HEAD
 import React, { FC } from "react";
 import { Block } from "@prisma/client";
+=======
+>>>>>>> bf43fa3a13034cfef0df22d891967e9766609e50
 import BlocksList from "components/blocks-list";
-import NewBlock from "components/new-block";
-import { apiBaseUrl } from "constants/constants";
+import NewBlockPanel from "components/new-block-panel";
+import { createBlock } from "lib/actions/block-actions";
+import { getProjectById } from "lib/actions/project-actions";
 import { MoveLeft } from "lucide-react";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
+<<<<<<< HEAD
 import TextBlock from "components/blocks/text-block/text-block";
 import ImageBlock from "components/blocks/image-block/image-block";
 
@@ -42,16 +46,18 @@ const createNewBlock = async (projectId: number) => {
   return res.json();
 };
 
+=======
+>>>>>>> bf43fa3a13034cfef0df22d891967e9766609e50
 const Project = async ({
   params: { projectId },
 }: {
   params: { projectId: string };
 }) => {
-  const blocks = await getBlocks(projectId);
+  const { blocks } = await getProjectById(projectId);
 
-  const handleAddNewBlock = async () => {
+  const handleCreateBlock = async (blockData: any) => {
     "use server";
-    await createNewBlock(+projectId);
+    await createBlock(projectId, blockData);
   };
 
   //  type Props = {
@@ -70,9 +76,9 @@ const Project = async ({
 
   return (
     <div data-auto="home" className="flex min-h-screen flex-col items-center">
-      <BlocksList blocks={blocks} projectId={+projectId} />
+      <BlocksList blocks={blocks} projectId={projectId} />
 
-      <NewBlock createBlock={handleAddNewBlock} />
+      <NewBlockPanel handleCreateBlock={handleCreateBlock} />
 
       <Link href="/" className="absolute left-4 top-4">
         <MoveLeft />

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "../shared/ui/button";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Menu } from "lucide-react";
 import {
   Sheet,
@@ -19,21 +19,43 @@ const BLOCKS = [
   {
     id: "text",
     label: "Text",
+<<<<<<< HEAD:src/components/new-block/new-block.tsx
+=======
+    blockData: {
+      type: "TextBlockModel",
+      description: "Description",
+      title: "Title",
+      subtitle: "Subtitle",
+    },
+>>>>>>> bf43fa3a13034cfef0df22d891967e9766609e50:src/components/new-block-panel/new-block-panel.tsx
   },
   {
     id: "images",
     label: "Images",
+<<<<<<< HEAD:src/components/new-block/new-block.tsx
   },
   {
     id: "other",
     label: "Other",
+=======
+    blockData: {
+      type: "ImageBlockModel",
+      imageUrls: ["img1", "img2"],
+    },
+>>>>>>> bf43fa3a13034cfef0df22d891967e9766609e50:src/components/new-block-panel/new-block-panel.tsx
   },
+  // {
+  //   id: "other",
+  //   label: "Other",
+  //   onClick: () => undefined,
+  // },
 ];
 
 type Props = {
-  createBlock: () => any;
+  handleCreateBlock: (blockData: any) => void;
 };
 
+<<<<<<< HEAD:src/components/new-block/new-block.tsx
 const NewBlock: FC<Props> = ({ createBlock }) => {
   const [open, setOpen] = useState(false);
   const handleClickAll = () => {
@@ -58,11 +80,14 @@ const NewBlock: FC<Props> = ({ createBlock }) => {
     }
   };
 
+=======
+const NewBlockPanel: FC<Props> = ({ handleCreateBlock }) => {
+>>>>>>> bf43fa3a13034cfef0df22d891967e9766609e50:src/components/new-block-panel/new-block-panel.tsx
   return (
     <div className="flex justify-between gap-5 mt-[80px]">
       <Sheet>
         <SheetTrigger asChild>
-          <Button onClick={handleClickAll}>
+          <Button>
             <Menu className="pr-2" />
             All blocks
           </Button>
@@ -80,9 +105,15 @@ const NewBlock: FC<Props> = ({ createBlock }) => {
       </Sheet>
 
       <ul className="flex">
+<<<<<<< HEAD:src/components/new-block/new-block.tsx
         {BLOCKS.map(({ id, label }) => (
           <Button
             onClick={() => addNewBlock(id)}
+=======
+        {BLOCKS.map(({ id, label, blockData }) => (
+          <Button
+            onClick={() => handleCreateBlock(blockData)}
+>>>>>>> bf43fa3a13034cfef0df22d891967e9766609e50:src/components/new-block-panel/new-block-panel.tsx
             variant={"blocks-list"}
             key={id}
           >
@@ -94,4 +125,4 @@ const NewBlock: FC<Props> = ({ createBlock }) => {
   );
 };
 
-export default NewBlock;
+export default NewBlockPanel;
