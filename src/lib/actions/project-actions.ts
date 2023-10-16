@@ -3,12 +3,13 @@
 import { connectToDatabase } from "lib/mongoose";
 import { revalidatePath } from "next/cache";
 import { BlockModel, ProjectModel } from "database/project.model";
+import User from "database/user.model";
 
-export async function getProjects() {
+export async function getProjects(userId: string) {
   try {
     connectToDatabase();
 
-    const projects = await ProjectModel.find({});
+    const projects = await ProjectModel.find({ author: userId });
 
     return { projects };
   } catch (error) {
@@ -33,14 +34,18 @@ export async function getProjectById(id: string) {
   }
 }
 
-export const createProject = async (formData: FormData, author: string) => {
+export const createProject = async (formData: FormData, authorId: string) => {
   try {
     connectToDatabase();
     const name = formData.get("name")?.toString();
 
-    await ProjectModel.create({
+    const project = await ProjectModel.create({
       name,
-      author,
+      author: authorId,
+    });
+
+    await User.findByIdAndUpdate(authorId, {
+      $push: { projects: project._id },
     });
 
     revalidatePath("/");
@@ -50,11 +55,15 @@ export const createProject = async (formData: FormData, author: string) => {
   }
 };
 
-export const deleteProject = async (id: string) => {
+export const deleteProject = async (id: string, userId: string) => {
   try {
-    const project = await ProjectModel.findOneAndDelete({ _id: id });
+    const deletedProject = await ProjectModel.findOneAndDelete({ _id: id });
 
-    await BlockModel.deleteMany({ projectId: project._id });
+    await BlockModel.deleteMany({ projectId: deletedProject._id });
+
+    await User.findByIdAndUpdate(userId, {
+      $pull: { projects: deletedProject._id },
+    });
 
     revalidatePath("/");
   } catch (error) {
