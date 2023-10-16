@@ -5,7 +5,7 @@ const blockSchema = new Schema(
   {
     discriminatorKey: "type",
     timestamps: true,
-  },
+  }
 );
 
 const textBlockSchema = new Schema({
@@ -15,7 +15,17 @@ const textBlockSchema = new Schema({
 });
 
 const imageBlockSchema = new Schema({
-  imageUrls: [String],
+  images: [
+    {
+      imageUrl: String,
+      title: String,
+    },
+  ],
+  styles: {
+    paddingTop: String,
+    paddingBottom: String,
+    background: String,
+  },
 });
 
 const projectSchema = new Schema(
@@ -29,7 +39,7 @@ const projectSchema = new Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 export const BlockModel = models.BlockModel || model("BlockModel", blockSchema);
