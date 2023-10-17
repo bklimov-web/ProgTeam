@@ -1,17 +1,22 @@
 import { Schema, model, models } from "mongoose";
 
 const blockSchema = new Schema(
-  { type: String },
+  {
+    type: String,
+    projectId: { type: Schema.Types.ObjectId, ref: "ProjectModel" },
+  },
   {
     discriminatorKey: "type",
     timestamps: true,
-  }
+  },
 );
 
 const textBlockSchema = new Schema({
-  title: String,
-  subtitle: String,
-  description: String,
+  content: {
+    title: String,
+    subtitle: String,
+    description: String,
+  },
 });
 
 const imageBlockSchema = new Schema({
@@ -38,11 +43,12 @@ const projectSchema = new Schema(
       type: String,
       required: false,
     },
+    author: { type: Schema.Types.ObjectId, ref: "User" },
     blocks: [{ type: Schema.Types.ObjectId, ref: "BlockModel" }],
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export const BlockModel = models.BlockModel || model("BlockModel", blockSchema);

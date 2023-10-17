@@ -10,7 +10,7 @@ const Project = async ({
 }: {
   params: { projectId: string };
 }) => {
-  const { blocks } = await getProjectById(projectId);
+  const project = await getProjectById(projectId);
 
   const handleCreateBlock = async (blockData: any) => {
     "use server";
@@ -18,15 +18,17 @@ const Project = async ({
   };
 
   return (
-    <div data-auto="home" className="flex min-h-screen flex-col items-center">
-      <BlocksList blocks={blocks} projectId={projectId} />
+    <main className="relative flex min-h-screen flex-col items-center">
+      {project?.blocks && (
+        <BlocksList blocks={project.blocks} projectId={projectId} />
+      )}
 
       <NewBlockPanel handleCreateBlock={handleCreateBlock} />
 
       <Link href="/" className="absolute left-4 top-4">
         <MoveLeft />
       </Link>
-    </div>
+    </main>
   );
 };
 

@@ -1,44 +1,36 @@
-import { ImageBlock } from "components/blocks/image-block";
-import TextBlock from "components/blocks/text-block";
 import { FC } from "react";
+import { getBlock } from "./get-block";
+import { BlockWrapper } from "components/block-wrapper";
+import { deleteBlock, updateBlock } from "lib/actions/block-actions";
 
 type Props = {
   blocks: any[];
   projectId: string;
+  preview?: boolean;
 };
 
-const BlocksList: FC<Props> = ({ blocks, projectId }) => {
+const BlocksList: FC<Props> = ({ blocks, projectId, preview = false }) => {
   return (
     <section>
       {blocks.map((block) => {
         const id = block._id.toString();
-        if (block.type === "TextBlockModel") {
-          const { title, subtitle, description } = block;
+        const { component, form } = getBlock(
+          block,
+          updateBlock(id, block.type),
+        );
 
-          return (
-            <TextBlock
-              key={id}
-              projectId={projectId}
-              id={id}
-              title={title}
-              description={description}
-              subtitle={subtitle}
-            />
-          );
+        if (preview) {
+          return component;
         }
-        const {
-          content: { images },
-          styles,
-        } = block;
-        console.log(styles);
+
         return (
-          <ImageBlock
-            projectId={projectId}
-            id={id}
+          <BlockWrapper
             key={id}
-            images={images.map((image) => image.toJSON())}
-            styles={styles.toJSON()}
-          />
+            handleDelete={deleteBlock(projectId, id)}
+            content={form}
+          >
+            {component}
+          </BlockWrapper>
         );
       })}
     </section>

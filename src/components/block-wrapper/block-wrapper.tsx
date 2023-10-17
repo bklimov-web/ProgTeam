@@ -1,14 +1,12 @@
 "use client";
 
 import { Sidebar } from "components/shared/sidebar";
-import TextBlockForm from "components/blocks/text-block/text-block-form";
 import { Button } from "components/shared/ui/button";
 import { Plus, Trash2 } from "lucide-react";
 import { ReactNode } from "react";
 
 type Props = {
   handleDelete: () => void;
-  updateBlock: (values: any) => void;
   children: ReactNode;
   content: any;
   className?: string;
@@ -17,16 +15,13 @@ type Props = {
 const BlockWrapper = ({
   children,
   handleDelete,
-  updateBlock,
   content,
   className,
 }: Props) => {
   return (
     <div className={`relative group align-middle h-fit w-screen ${className}`}>
       <Sidebar
-        content={
-          <TextBlockForm updateBlock={updateBlock} defaultValues={content} />
-        }
+        content={content}
         trigger={
           <Button className="absolute left-[100px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             Settings

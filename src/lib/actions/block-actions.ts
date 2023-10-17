@@ -3,9 +3,12 @@ import { revalidatePath } from "next/cache";
 
 export const createBlock = async (projectId: string, data: any) => {
   "use server";
-
+  console.log(data.content.images);
   try {
-    const newBlock = await BlockModel.create(data);
+    const newBlock = await BlockModel.create({
+      // projectId,
+      ...data,
+    });
 
     await ProjectModel.findByIdAndUpdate(projectId, {
       $push: { blocks: newBlock._id },
@@ -18,15 +21,13 @@ export const createBlock = async (projectId: string, data: any) => {
   }
 };
 
-export const updateBlock = async (id: string, data: any, type: string) => {
+export const updateBlock = (id: string, type: string) => async (data: any) => {
   "use server";
 
   try {
-    const newBlock = await BlockModel.findOneAndUpdate(
-      { _id: id, type },
-      data,
-      { new: true }
-    );
+    const block = await BlockModel.findOneAndUpdate({ _id: id, type }, data, {
+      new: true,
+    });
 
     revalidatePath("/project/:id");
   } catch (error) {
@@ -35,7 +36,7 @@ export const updateBlock = async (id: string, data: any, type: string) => {
   }
 };
 
-export const deleteBlock = async (projectId: string, id: string) => {
+export const deleteBlock = (projectId: string, id: string) => async () => {
   "use server";
 
   try {

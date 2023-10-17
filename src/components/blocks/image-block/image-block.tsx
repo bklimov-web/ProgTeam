@@ -11,6 +11,7 @@ interface img {
   title: string;
   alt: string;
   imageUrl: string;
+  _id: string;
 }
 
 interface divStyles {
@@ -18,9 +19,9 @@ interface divStyles {
   paddingTop: string;
   background: string;
 }
+
 type ImageProps = {
   id: string;
-  projectId: string;
   images: img[];
   styles: {
     paddingTop: string;
@@ -29,7 +30,7 @@ type ImageProps = {
   };
 };
 
-const ImageBlock: FC<ImageProps> = ({ id, projectId, images, styles }) => {
+const ImageBlock: FC<ImageProps> = ({ id, images, styles }) => {
   //  const [dataImg, setDataImages] = useState(images);
   //  const [divStyles, setDivStyles] = useState({ ...styles });
 
@@ -45,17 +46,12 @@ const ImageBlock: FC<ImageProps> = ({ id, projectId, images, styles }) => {
     //setDataImages(updatedImages);
   };
 
-  const handleUpdate = async (values: divStyles) => {
-    "use server";
-    await updateBlock(id, { styles: values }, "ImageBlockModel");
-  };
-
   const renderImages = () => {
     return (
       <>
-        {images.map((image, index) => {
+        {images.map((image) => {
           return (
-            <Dialog key={index}>
+            <Dialog key={image._id}>
               <DialogTrigger className="w-[300px] h-[300px]">
                 <img
                   className="w-[100%] h-[100%] object-cover"
@@ -64,7 +60,9 @@ const ImageBlock: FC<ImageProps> = ({ id, projectId, images, styles }) => {
                   //key={image.id}
                 />
               </DialogTrigger>
-              <ImageUploadModal onImageUpload={handleImageUpload(index)} />
+              <ImageUploadModal
+                onImageUpload={updateBlock(id, "ImageBlockModel")}
+              />
             </Dialog>
           );
         })}
@@ -90,7 +88,7 @@ const ImageBlock: FC<ImageProps> = ({ id, projectId, images, styles }) => {
             //handleDivStyleChange={handleDivStyleChange}
             divStyles={styles}
             backgroundColor={styles.background}
-            updateBlock={handleUpdate}
+            updateBlock={updateBlock(id, "ImageBlockModel")}
           />
         }
         trigger={<Button>Block Settings</Button>}

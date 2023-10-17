@@ -58,7 +58,7 @@ const ImageBlockSettings = ({
   });
 
   function onSubmit(values: divStyles) {
-    updateBlock(values);
+    updateBlock({ styles: values });
     //handleSubmit(values);
   }
 

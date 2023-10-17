@@ -19,9 +19,11 @@ const BLOCKS = [
     label: "Text",
     blockData: {
       type: "TextBlockModel",
-      description: "Description",
-      title: "Title",
-      subtitle: "Subtitle",
+      content: {
+        description: "Description",
+        title: "Title",
+        subtitle: "Subtitle",
+      },
     },
   },
   {
@@ -32,21 +34,18 @@ const BLOCKS = [
       content: {
         images: [
           {
-            //  id: 0,
             alt: "Img1",
             title: "Img1",
             imageUrl:
               "http://static8.depositphotos.com/1146092/920/i/450/depositphotos_9202690-Dog-sleep.jpg",
           },
           {
-            //  id: 1,
             alt: "Img2",
             title: "Img2",
             imageUrl:
               "http://st.depositphotos.com/1030020/3490/i/450/depositphotos_34909067-German-Shepherd-Dog-and-cat-together.jpg",
           },
           {
-            //  id: 2,
             alt: "Img3",
             title: "Img3",
             imageUrl:
