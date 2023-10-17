@@ -6,7 +6,7 @@ export const createBlock = async (projectId: string, data: any) => {
 
   try {
     const newBlock = await BlockModel.create({
-      // projectId,
+      projectId,
       ...data,
     });
 
