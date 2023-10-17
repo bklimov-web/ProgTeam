@@ -3,8 +3,12 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-const DropzoneComponent = ({ handleDrop }: { handleDrop: (value) => void }) => {
-  const onDrop = useCallback((acceptedFiles) => {
+const DropzoneComponent = ({
+  handleDrop,
+}: {
+  handleDrop: (value: any) => void;
+}) => {
+  const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
     console.log("Accepted files:", acceptedFiles);
     handleDrop(acceptedFiles);
@@ -13,7 +17,10 @@ const DropzoneComponent = ({ handleDrop }: { handleDrop: (value) => void }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div {...getRootProps()} style={dropzoneStyle}>
+    <div
+      {...getRootProps()}
+      className="w-48 h-48 border-2 border-gray-600 border-dashed rounded-md flex justify-center items-center text-center"
+    >
       <input {...getInputProps()} />
       {isDragActive ? (
         <span>Drop the files here ...</span>
@@ -22,19 +29,6 @@ const DropzoneComponent = ({ handleDrop }: { handleDrop: (value) => void }) => {
       )}
     </div>
   );
-};
-
-const dropzoneStyle = {
-  width: "200px",
-  height: "200px",
-  borderWidth: "2px",
-  borderColor: "#666",
-  borderStyle: "dashed",
-  borderRadius: "4px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  textAlign: "center",
 };
 
 export default DropzoneComponent;

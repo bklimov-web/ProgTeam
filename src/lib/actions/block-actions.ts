@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 
 export const createBlock = async (projectId: string, data: any) => {
   "use server";
-  console.log(data.content.images);
+
   try {
     const newBlock = await BlockModel.create({
       // projectId,
@@ -25,7 +25,7 @@ export const updateBlock = (id: string, type: string) => async (data: any) => {
   "use server";
 
   try {
-    const block = await BlockModel.findOneAndUpdate({ _id: id, type }, data, {
+    await BlockModel.findOneAndUpdate({ _id: id, type }, data, {
       new: true,
     });
 
