@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
 const DropzoneComponent = ({ handleDrop }: { handleDrop: (value) => void }) => {
@@ -16,9 +16,9 @@ const DropzoneComponent = ({ handleDrop }: { handleDrop: (value) => void }) => {
     <div {...getRootProps()} style={dropzoneStyle}>
       <input {...getInputProps()} />
       {isDragActive ? (
-        <div>Drop the files here ...</div>
+        <span>Drop the files here ...</span>
       ) : (
-        <div>Drag 'n' drop some files here, or click to select files</div>
+        <span>Drag 'n' drop some files here, or click to select files</span>
       )}
     </div>
   );

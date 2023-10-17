@@ -1,12 +1,8 @@
-import React from "react";
-import Dropzone from "react-dropzone";
 import {
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "components/shared/ui/dialog";
-import DragAndDrop from "./drag-and-drop";
 import DropzoneComponent from "./drag-and-drop";
 
 interface ImageUploadModalProps {
@@ -14,7 +10,8 @@ interface ImageUploadModalProps {
 }
 
 const ImageUploadModal = ({ onImageUpload }: ImageUploadModalProps) => {
-  const handleDrop = (acceptedFiles: any) => {
+  const handleDrop = async (acceptedFiles: any) => {
+    "use server";
     if (acceptedFiles && acceptedFiles.length > 0) {
       onImageUpload(acceptedFiles);
     }
@@ -24,8 +21,8 @@ const ImageUploadModal = ({ onImageUpload }: ImageUploadModalProps) => {
     <DialogContent>
       <DialogHeader>
         <DialogTitle>Image loader</DialogTitle>
-        <DialogDescription>
-          {/*<Dropzone onDrop={handleDrop}>
+
+        {/*<Dropzone onDrop={handleDrop}>
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()} className="dropzone">
                 <input {...getInputProps()} />
@@ -34,8 +31,7 @@ const ImageUploadModal = ({ onImageUpload }: ImageUploadModalProps) => {
             )}
             <DragAndDrop />
           </Dropzone>*/}
-          <DropzoneComponent handleDrop={handleDrop} />
-        </DialogDescription>
+        <DropzoneComponent handleDrop={handleDrop} />
       </DialogHeader>
     </DialogContent>
   );

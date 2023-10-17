@@ -10,7 +10,6 @@ import {
 import { Input } from "components/shared/ui/input";
 import { Button } from "components/shared/ui/button";
 import { useForm } from "react-hook-form";
-import { ChromePicker } from "react-color";
 import {
   Popover,
   PopoverContent,
@@ -25,6 +24,7 @@ import {
   FormControl,
   FormMessage,
 } from "components/shared/ui/form";
+import { ChromePicker } from "react-color";
 
 type img = {
   title: string;
@@ -53,14 +53,11 @@ const ImageBlockSettings = ({
   updateBlock,
 }: ImageProps) => {
   //  const handleSubmit = (data: divStyles) => handleDivStyleChange(data);
-
-  console.log(divStyles);
   const form = useForm<divStyles>({
     defaultValues: divStyles,
   });
 
   function onSubmit(values: divStyles) {
-    console.log(values);
     updateBlock(values);
     //handleSubmit(values);
   }
@@ -71,46 +68,60 @@ const ImageBlockSettings = ({
         <FormField
           control={form.control}
           name="paddingTop"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Padding Top</FormLabel>
-              <Select onValueChange={field.onChange} {...field}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select padding top" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="10px">10px</SelectItem>
-                  <SelectItem value="30px">30px</SelectItem>
-                  <SelectItem value="50px">50px</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
+          render={({ field }) => {
+            const { ref, ...restField } = field;
+
+            return (
+              <FormItem>
+                <FormLabel>Padding Top</FormLabel>
+
+                <div ref={ref}>
+                  <Select onValueChange={field.onChange} {...restField}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select padding top" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="10px">10px</SelectItem>
+                      <SelectItem value="30px">30px</SelectItem>
+                      <SelectItem value="50px">50px</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
         />
         <FormField
           control={form.control}
           name="paddingBottom"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Padding Bottom</FormLabel>
-              <Select onValueChange={field.onChange} {...field}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select padding bottom" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="10px">10px</SelectItem>
-                  <SelectItem value="30px">30px</SelectItem>
-                  <SelectItem value="50px">50px</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
+          render={({ field }) => {
+            const { ref, ...restField } = field;
+
+            return (
+              <FormItem>
+                <FormLabel>Padding Bottom</FormLabel>
+
+                <div ref={ref}>
+                  <Select onValueChange={field.onChange} {...restField}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select padding bottom" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="10px">10px</SelectItem>
+                      <SelectItem value="30px">30px</SelectItem>
+                      <SelectItem value="50px">50px</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
         />
         <FormField
           control={form.control}

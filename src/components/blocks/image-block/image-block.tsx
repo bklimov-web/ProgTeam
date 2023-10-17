@@ -1,4 +1,4 @@
-import { useState, FC, useCallback } from "react";
+import { FC } from "react";
 import ImageUploadModal from "./image-upload-modal";
 import ImageBlockSettings from "./image-block-settings";
 import { Button } from "components/shared/ui/button";
@@ -37,8 +37,6 @@ const ImageBlock: FC<ImageProps> = ({ id, projectId, images, styles }) => {
   //    setDivStyles(data);
   //  };
 
-  console.log(styles);
-
   const handleImageUpload = (index: number) => async (newImage: any) => {
     "use server";
     const updatedImages = [...images];
@@ -49,8 +47,7 @@ const ImageBlock: FC<ImageProps> = ({ id, projectId, images, styles }) => {
 
   const handleUpdate = async (values: divStyles) => {
     "use server";
-    console.log("image styles updated", values);
-    await updateBlock(id, values, "ImageBlockModel");
+    await updateBlock(id, { styles: values }, "ImageBlockModel");
   };
 
   const renderImages = () => {
