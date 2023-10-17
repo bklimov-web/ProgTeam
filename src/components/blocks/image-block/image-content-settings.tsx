@@ -8,10 +8,9 @@ import { Label } from "components/shared/ui/label";
 import { Trash2 } from "lucide-react";
 
 type img = {
-  id: number;
-  alt: string;
+  imageUrl: string;
   title: string;
-  src: string;
+  alt: string;
 };
 type ImageProps = {
   data: img[];
@@ -19,7 +18,6 @@ type ImageProps = {
 };
 
 const ImageContentSettings = ({ data }: ImageProps) => {
-  console.log(data);
   return (
     <div className="flex flex-col gap-10 justify-center">
       {data != undefined &&
@@ -27,7 +25,7 @@ const ImageContentSettings = ({ data }: ImageProps) => {
           return (
             <div className="flex gap-5 items-center">
               <div className="w-[150px] h-auto">
-                <img src={image.src} />
+                <img src={image.imageUrl} />
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
                 <Label htmlFor="title">Title</Label>

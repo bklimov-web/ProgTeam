@@ -26,8 +26,20 @@ const BlocksList: FC<Props> = ({ blocks, projectId }) => {
             />
           );
         }
-
-        return <ImageBlock projectId={projectId} id={id} key={id} />;
+        const {
+          content: { images },
+          styles,
+        } = block;
+        console.log(styles);
+        return (
+          <ImageBlock
+            projectId={projectId}
+            id={id}
+            key={id}
+            images={images.map((image) => image.toJSON())}
+            styles={styles.toJSON()}
+          />
+        );
       })}
     </section>
   );

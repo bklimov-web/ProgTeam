@@ -57,8 +57,6 @@ const HomePage = async () => {
       <ProjectsSection onDelete={deleteProject} projects={projects} />
 
       <AddProjectForm createNewProject={createNewProject} />
-
-      <ImageBlock />
     </div>
   );
 };

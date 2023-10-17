@@ -25,7 +25,7 @@ export const updateBlock = async (id: string, data: any, type: string) => {
     const newBlock = await BlockModel.findOneAndUpdate(
       { _id: id, type },
       data,
-      { new: true },
+      { new: true }
     );
 
     revalidatePath("/project/:id");

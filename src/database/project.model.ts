@@ -15,12 +15,15 @@ const textBlockSchema = new Schema({
 });
 
 const imageBlockSchema = new Schema({
-  images: [
-    {
-      imageUrl: String,
-      title: String,
-    },
-  ],
+  content: {
+    images: [
+      {
+        imageUrl: String,
+        title: String,
+        alt: String,
+      },
+    ],
+  },
   styles: {
     paddingTop: String,
     paddingBottom: String,

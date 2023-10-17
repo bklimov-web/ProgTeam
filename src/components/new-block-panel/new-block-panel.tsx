@@ -29,7 +29,36 @@ const BLOCKS = [
     label: "Images",
     blockData: {
       type: "ImageBlockModel",
-      imageUrls: ["img1", "img2"],
+      content: {
+        images: [
+          {
+            //  id: 0,
+            alt: "Img1",
+            title: "Img1",
+            imageUrl:
+              "http://static8.depositphotos.com/1146092/920/i/450/depositphotos_9202690-Dog-sleep.jpg",
+          },
+          {
+            //  id: 1,
+            alt: "Img2",
+            title: "Img2",
+            imageUrl:
+              "http://st.depositphotos.com/1030020/3490/i/450/depositphotos_34909067-German-Shepherd-Dog-and-cat-together.jpg",
+          },
+          {
+            //  id: 2,
+            alt: "Img3",
+            title: "Img3",
+            imageUrl:
+              "http://static9.depositphotos.com/1032440/1111/i/450/depositphotos_11110118-Little-dogs-in-the-park.jpg",
+          },
+        ],
+      },
+      styles: {
+        paddingTop: "10px",
+        paddingBottom: "10px",
+        background: "white",
+      },
     },
   },
   // {

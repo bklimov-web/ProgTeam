@@ -25,12 +25,11 @@ import {
   FormControl,
   FormMessage,
 } from "components/shared/ui/form";
-//import { toast } from "@/components/ui/use-toast";
 
 type img = {
-  id: number;
+  title: string;
   alt: string;
-  src: string;
+  imageUrl: string;
 };
 interface divStyles {
   paddingBottom: string;
@@ -39,10 +38,11 @@ interface divStyles {
 }
 type ImageProps = {
   data: img[];
-  handleDivStyleChange: (data: divStyles) => void;
+  handleDivStyleChange?: (data: divStyles) => void;
   backgroundColor: string;
   styles?: {};
   divStyles: divStyles;
+  updateBlock: (values: any) => void;
 };
 
 const ImageBlockSettings = ({
@@ -50,19 +50,24 @@ const ImageBlockSettings = ({
   handleDivStyleChange,
   backgroundColor,
   divStyles,
+  updateBlock,
 }: ImageProps) => {
-  const handleRegistration = (data: divStyles) => handleDivStyleChange(data);
+  //  const handleSubmit = (data: divStyles) => handleDivStyleChange(data);
 
+  console.log(divStyles);
   const form = useForm<divStyles>({
     defaultValues: divStyles,
   });
 
+  function onSubmit(values: divStyles) {
+    console.log(values);
+    updateBlock(values);
+    //handleSubmit(values);
+  }
+
   return (
     <Form {...form}>
-      <form
-        className="w-2/3 space-y-6"
-        onSubmit={form.handleSubmit(handleRegistration)}
-      >
+      <form className="w-2/3 space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="paddingTop"
@@ -134,6 +139,7 @@ const ImageBlockSettings = ({
           )}
         />
         <Button type="submit">Submit</Button>
+        <Button onClick={() => console.log(divStyles)}>Cancel</Button>
       </form>
     </Form>
   );
