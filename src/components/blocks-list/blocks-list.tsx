@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { getBlock } from "./get-block";
 import { BlockWrapper } from "components/block-wrapper";
-import { deleteBlock, updateBlock } from "lib/actions/block-actions";
+import { updateBlock } from "lib/actions/block-actions";
 
 type Props = {
   blocks: any[];
@@ -26,8 +26,10 @@ const BlocksList: FC<Props> = ({ blocks, projectId, preview = false }) => {
         return (
           <BlockWrapper
             key={id}
-            handleDelete={deleteBlock(projectId, id)}
+            projectId={projectId}
+            id={id}
             content={form}
+            disabled={block.disabled}
           >
             {component}
           </BlockWrapper>

@@ -4,6 +4,7 @@ const blockSchema = new Schema(
   {
     type: String,
     projectId: { type: Schema.Types.ObjectId, ref: "ProjectModel" },
+    disabled: Boolean,
   },
   {
     discriminatorKey: "type",

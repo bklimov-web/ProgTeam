@@ -30,7 +30,7 @@ function TextBlockForm({
   updateBlock,
 }: {
   defaultValues: TextBlockContentProps;
-  updateBlock: (values: TextBlockFormSchema) => void;
+  updateBlock: (values: { content: TextBlockFormSchema }) => void;
 }) {
   const form = useForm<TextBlockFormSchema>({
     resolver: zodResolver(formSchema),
@@ -38,7 +38,7 @@ function TextBlockForm({
   });
 
   function onSubmit(values: TextBlockFormSchema) {
-    updateBlock(values);
+    updateBlock({ content: values });
   }
 
   return (
