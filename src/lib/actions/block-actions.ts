@@ -5,7 +5,7 @@ export const createBlock = async (projectId: string, data: any) => {
   "use server";
 
   try {
-    const createdData = { ...data, disabled: false };
+    const createdData = { ...data, projectId, disabled: false };
 
     const newBlock = await BlockModel.create(createdData);
 
@@ -20,15 +20,11 @@ export const createBlock = async (projectId: string, data: any) => {
   }
 };
 
-export const updateBlock = async (id: string, data: any, type: string) => {
+export const updateBlock = (id: string, type: string) => async (data: any) => {
   "use server";
 
   try {
-    const newBlock = await BlockModel.findOneAndUpdate(
-      { _id: id, type },
-      data,
-      { new: true },
-    );
+    await BlockModel.findOneAndUpdate({ _id: id, type }, data, { new: true });
 
     revalidatePath("/project/:id");
   } catch (error) {
@@ -37,7 +33,7 @@ export const updateBlock = async (id: string, data: any, type: string) => {
   }
 };
 
-export const deleteBlock = async (projectId: string, id: string) => {
+export const deleteBlock = (projectId: string, id: string) => async () => {
   "use server";
 
   try {
@@ -54,7 +50,7 @@ export const deleteBlock = async (projectId: string, id: string) => {
   }
 };
 
-export const duplicateBlock = async (projectId: string, id: string) => {
+export const duplicateBlock = (projectId: string, id: string) => async () => {
   "use server";
 
   try {
@@ -76,7 +72,7 @@ export const duplicateBlock = async (projectId: string, id: string) => {
   }
 };
 
-export const moveBlockUp = async (projectId: string, id: string) => {
+export const moveBlockUp = (projectId: string, id: string) => async () => {
   "use server";
 
   try {
@@ -104,7 +100,7 @@ export const moveBlockUp = async (projectId: string, id: string) => {
   }
 };
 
-export const moveBlockDown = async (projectId: string, id: string) => {
+export const moveBlockDown = (projectId: string, id: string) => async () => {
   "use server";
 
   try {
@@ -133,7 +129,7 @@ export const moveBlockDown = async (projectId: string, id: string) => {
   }
 };
 
-export const toggleDisableBlock = async (id: string) => {
+export const toggleDisableBlock = (id: string) => async () => {
   "use server";
 
   try {
@@ -152,4 +148,3 @@ export const toggleDisableBlock = async (id: string) => {
     throw error;
   }
 };
-

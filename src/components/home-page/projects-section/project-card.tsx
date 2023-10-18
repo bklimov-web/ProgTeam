@@ -8,13 +8,14 @@ import { FC } from "react";
 type Props = {
   id: string;
   name: string;
+  userId: string;
 };
 
-const ProjectCard: FC<Props> = ({ id, name }) => {
+const ProjectCard: FC<Props> = ({ id, name, userId }) => {
   return (
     <div className="relative cursor-pointer">
       <XSquare
-        onClick={() => deleteProject(id)}
+        onClick={() => deleteProject(id, userId)}
         className="absolute right-2 top-2"
       />
       <Link

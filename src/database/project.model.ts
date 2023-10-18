@@ -1,7 +1,11 @@
 import { Schema, model, models } from "mongoose";
 
 const blockSchema = new Schema(
-  { type: String },
+  {
+    type: String,
+    projectId: { type: Schema.Types.ObjectId, ref: "ProjectModel" },
+    disabled: Boolean,
+  },
   {
     discriminatorKey: "type",
     timestamps: true,
@@ -9,15 +13,17 @@ const blockSchema = new Schema(
 );
 
 const textBlockSchema = new Schema({
-  disabled: Boolean,
-  title: String,
-  subtitle: String,
-  description: String,
+  content: {
+    title: String,
+    subtitle: String,
+    description: String,
+  },
 });
 
 const imageBlockSchema = new Schema({
-  disabled: Boolean,
-  imageUrls: [String],
+  content: {
+    imageUrls: [String],
+  },
 });
 
 const projectSchema = new Schema(
@@ -27,6 +33,7 @@ const projectSchema = new Schema(
       type: String,
       required: false,
     },
+    author: { type: Schema.Types.ObjectId, ref: "User" },
     blocks: [{ type: Schema.Types.ObjectId, ref: "BlockModel" }],
   },
   {

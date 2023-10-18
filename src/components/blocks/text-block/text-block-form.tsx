@@ -11,7 +11,6 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormDescription,
   FormMessage,
 } from "components/shared/ui/form";
 import { Input } from "components/shared/ui/input";
@@ -26,21 +25,20 @@ const formSchema = z.object({
 
 export type TextBlockFormSchema = z.infer<typeof formSchema>;
 
-function TextBlockConfig({
+function TextBlockForm({
   defaultValues,
   updateBlock,
 }: {
   defaultValues: TextBlockContentProps;
-  updateBlock: (values: TextBlockFormSchema) => void;
+  updateBlock: (values: { content: TextBlockFormSchema }) => void;
 }) {
-  // 1. Define your form.
   const form = useForm<TextBlockFormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
 
   function onSubmit(values: TextBlockFormSchema) {
-    updateBlock(values);
+    updateBlock({ content: values });
   }
 
   return (
@@ -66,9 +64,6 @@ function TextBlockConfig({
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -82,9 +77,6 @@ function TextBlockConfig({
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -98,9 +90,6 @@ function TextBlockConfig({
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -110,4 +99,4 @@ function TextBlockConfig({
   );
 }
 
-export default TextBlockConfig;
+export default TextBlockForm;

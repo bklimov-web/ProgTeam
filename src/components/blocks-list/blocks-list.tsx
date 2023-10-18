@@ -1,34 +1,39 @@
-import { ImageBlock } from "components/blocks/image-block";
-import TextBlock from "components/blocks/text-block";
 import { FC } from "react";
+import { getBlock } from "./get-block";
+import { BlockWrapper } from "components/block-wrapper";
+import { updateBlock } from "lib/actions/block-actions";
 
 type Props = {
   blocks: any[];
   projectId: string;
+  preview?: boolean;
 };
 
-const BlocksList: FC<Props> = ({ blocks, projectId }) => {
+const BlocksList: FC<Props> = ({ blocks, projectId, preview = false }) => {
   return (
     <section>
       {blocks.map((block) => {
         const id = block._id.toString();
-        if (block.type === "TextBlockModel") {
-          const { title, subtitle, description, disabled } = block;
+        const { component, form } = getBlock(
+          block,
+          updateBlock(id, block.type),
+        );
 
-          return (
-            <TextBlock
-              key={id}
-              projectId={projectId}
-              id={id}
-              disabled={disabled}
-              title={title}
-              description={description}
-              subtitle={subtitle}
-            />
-          );
+        if (preview) {
+          return component;
         }
 
-        return <ImageBlock projectId={projectId} id={id} disabled={block.disabled} key={id} />;
+        return (
+          <BlockWrapper
+            key={id}
+            projectId={projectId}
+            id={id}
+            content={form}
+            disabled={block.disabled}
+          >
+            {component}
+          </BlockWrapper>
+        );
       })}
     </section>
   );
