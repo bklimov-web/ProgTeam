@@ -37,21 +37,11 @@ interface divStyles {
   background: string;
 }
 type ImageProps = {
-  data: img[];
-  handleDivStyleChange?: (data: divStyles) => void;
-  backgroundColor: string;
-  styles?: {};
   divStyles: divStyles;
   updateBlock: (values: any) => void;
 };
 
-const ImageBlockSettings = ({
-  data,
-  handleDivStyleChange,
-  backgroundColor,
-  divStyles,
-  updateBlock,
-}: ImageProps) => {
+const ImageBlockSettings = ({ divStyles, updateBlock }: ImageProps) => {
   //  const handleSubmit = (data: divStyles) => handleDivStyleChange(data);
   const form = useForm<divStyles>({
     defaultValues: divStyles,

@@ -51,19 +51,23 @@ const ImageBlock: FC<ImageProps> = ({ id, images, styles }) => {
       <>
         {images.map((image) => {
           return (
-            <Dialog key={image._id}>
-              <DialogTrigger className="w-[300px] h-[300px]">
-                <img
-                  className="w-[100%] h-[100%] object-cover"
-                  src={image.imageUrl}
-                  alt={image.alt}
-                  //key={image.id}
+            <div>
+              <Dialog key={image._id}>
+                <DialogTrigger className="w-[300px] h-[300px]">
+                  <img
+                    className="w-[100%] h-[100%] object-cover"
+                    src={image.imageUrl}
+                    alt={image.alt}
+                    //key={image.id}
+                  />
+                </DialogTrigger>
+                <ImageUploadModal
+                  onImageUpload={updateBlock(id, "ImageBlockModel")}
                 />
-              </DialogTrigger>
-              <ImageUploadModal
-                onImageUpload={updateBlock(id, "ImageBlockModel")}
-              />
-            </Dialog>
+              </Dialog>
+
+              <div>{image.title}</div>
+            </div>
           );
         })}
       </>
@@ -73,21 +77,23 @@ const ImageBlock: FC<ImageProps> = ({ id, images, styles }) => {
   return (
     <div style={styles} id="block-id" className="mx-auto h-full px-5">
       <div>
-        <div className="flex justify-between gap-5 w-[1000px]">
+        <div className="flex flex-wrap gap-10 w-[1000px] m-auto">
           {renderImages()}
         </div>
       </div>
       <Sidebar
-        content={<ImageContentSettings data={images} />}
+        content={
+          <ImageContentSettings
+            data={images}
+            updateBlock={updateBlock(id, "ImageBlockModel")}
+          />
+        }
         trigger={<Button>Content Settings</Button>}
       />
       <Sidebar
         content={
           <ImageBlockSettings
-            data={images}
-            //handleDivStyleChange={handleDivStyleChange}
             divStyles={styles}
-            backgroundColor={styles.background}
             updateBlock={updateBlock(id, "ImageBlockModel")}
           />
         }
