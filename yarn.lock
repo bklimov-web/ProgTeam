@@ -4037,6 +4037,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
+next-router-mock@^0.9.10:
+  version "0.9.10"
+  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.9.10.tgz#c651ff556ad66cbcda30d4ebeadf575516fe42a3"
+  integrity sha512-bK6sRb/xGNFgHVUZuvuApn6KJBAKTPiP36A7a9mO77U4xQO5ukJx9WHlU67Tv8AuySd09pk0+Hu8qMVIAmLO6A==
+
 next@13.4.19:
   version "13.4.19"
   resolved "https://registry.yarnpkg.com/next/-/next-13.4.19.tgz#2326e02aeedee2c693d4f37b90e4f0ed6882b35f"
@@ -4060,6 +4065,11 @@ next@13.4.19:
     "@next/swc-win32-arm64-msvc" "13.4.19"
     "@next/swc-win32-ia32-msvc" "13.4.19"
     "@next/swc-win32-x64-msvc" "13.4.19"
+
+nextjs-breadcrumbs@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/nextjs-breadcrumbs/-/nextjs-breadcrumbs-1.1.9.tgz#6b50c3bcf0db6b59985d89cfb95b69b6bc4f4bb5"
+  integrity sha512-kzK1bysO5dqdlsPgJ84XgAfAFKWEqlXcSWROwuR1BqST8ibcmLc3LKgak8hiO2DH2mMdd0wTR7oCkebReyBQTg==
 
 node-int64@^0.4.0:
   version "0.4.0"
