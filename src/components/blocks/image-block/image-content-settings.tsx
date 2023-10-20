@@ -7,21 +7,9 @@ import { Label } from "components/shared/ui/label";
 import { Trash2 } from "lucide-react";
 
 import { convertToBase64 } from "../../../lib/utils";
+import { ImageContentProps } from "./types";
 
-type img = {
-  imageUrl: string;
-  title: string;
-  alt: string;
-  _id?: string;
-};
-
-type ImageProps = {
-  data: img[];
-  styles?: {};
-  updateBlock: (values: any) => void;
-};
-
-const ImageContentSettings = ({ data, updateBlock }: ImageProps) => {
+const ImageContentSettings = ({ data, updateBlock }: ImageContentProps) => {
   const [content, setContent] = useState(data);
 
   const handleInputChange = (e, imageId) => {

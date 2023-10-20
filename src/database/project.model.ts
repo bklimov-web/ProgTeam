@@ -8,7 +8,7 @@ const blockSchema = new Schema(
   {
     discriminatorKey: "type",
     timestamps: true,
-  },
+  }
 );
 
 const textBlockSchema = new Schema({
@@ -48,8 +48,20 @@ const projectSchema = new Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
+
+const photoSchema = new Schema(
+  {
+    public_id: String,
+    secure_url: String,
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export const Photo = models.photos || model("photos", photoSchema);
 
 export const BlockModel = models.BlockModel || model("BlockModel", blockSchema);
 

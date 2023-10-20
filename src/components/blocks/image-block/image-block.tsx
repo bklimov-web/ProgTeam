@@ -4,48 +4,15 @@ import ImageBlockSettings from "./image-block-settings";
 import { Button } from "components/shared/ui/button";
 import ImageContentSettings from "./image-content-settings";
 import { Sidebar } from "components/shared/sidebar";
-import { Dialog, DialogTrigger } from "components/shared/ui/dialog";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+} from "components/shared/ui/dialog";
 import { updateBlock } from "lib/actions/block-actions";
-
-interface img {
-  title: string;
-  alt: string;
-  imageUrl: string;
-  _id: string;
-}
-
-interface divStyles {
-  paddingBottom: string;
-  paddingTop: string;
-  background: string;
-}
-
-type ImageProps = {
-  id: string;
-  images: img[];
-  styles: {
-    paddingTop: string;
-    paddingBottom: string;
-    background: string;
-  };
-};
+import { ImageProps } from "./types";
 
 const ImageBlock: FC<ImageProps> = ({ id, images, styles }) => {
-  //  const [dataImg, setDataImages] = useState(images);
-  //  const [divStyles, setDivStyles] = useState({ ...styles });
-
-  //  const handleDivStyleChange = (data: divStyles) => {
-  //    setDivStyles(data);
-  //  };
-
-  const handleImageUpload = (index: number) => async (newImage: any) => {
-    "use server";
-    const updatedImages = [...images];
-    updatedImages[index].imageUrl = URL.createObjectURL(newImage[0]);
-
-    //setDataImages(updatedImages);
-  };
-
   const renderImages = () => {
     return (
       <>
@@ -58,12 +25,17 @@ const ImageBlock: FC<ImageProps> = ({ id, images, styles }) => {
                     className="w-[100%] h-[100%] object-cover"
                     src={image.imageUrl}
                     alt={image.alt}
-                    //key={image.id}
                   />
                 </DialogTrigger>
-                <ImageUploadModal
-                  onImageUpload={updateBlock(id, "ImageBlockModel")}
-                />
+                <DialogContent>
+                  <div>
+                    <ImageUploadModal
+                      updateBlock={updateBlock(id, "ImageBlockModel")}
+                      id={image._id}
+                      images={images}
+                    />
+                  </div>
+                </DialogContent>
               </Dialog>
 
               <div>{image.title}</div>

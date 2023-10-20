@@ -25,31 +25,15 @@ import {
   FormMessage,
 } from "components/shared/ui/form";
 import { ChromePicker } from "react-color";
+import { ImageBlockProps, divStyles } from "./types";
 
-type img = {
-  title: string;
-  alt: string;
-  imageUrl: string;
-};
-interface divStyles {
-  paddingBottom: string;
-  paddingTop: string;
-  background: string;
-}
-type ImageProps = {
-  divStyles: divStyles;
-  updateBlock: (values: any) => void;
-};
-
-const ImageBlockSettings = ({ divStyles, updateBlock }: ImageProps) => {
-  //  const handleSubmit = (data: divStyles) => handleDivStyleChange(data);
+const ImageBlockSettings = ({ divStyles, updateBlock }: ImageBlockProps) => {
   const form = useForm<divStyles>({
     defaultValues: divStyles,
   });
 
   function onSubmit(values: divStyles) {
     updateBlock({ styles: values });
-    //handleSubmit(values);
   }
 
   return (

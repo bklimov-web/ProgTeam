@@ -1,100 +1,61 @@
 "use client";
 
-import {
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "components/shared/ui/dialog";
+import { DialogHeader, DialogTitle } from "components/shared/ui/dialog";
+import { FormEvent, useState } from "react";
+import { convertToBase64 } from "lib/utils";
+import { ImageUploadModalProps, img } from "./types";
 import DropzoneComponent from "./drag-and-drop";
-import { useState } from "react";
+import { Button } from "components/shared/ui/button";
 
-interface ImageUploadModalProps {
-  onImageUpload: (img: string) => void;
-}
+type typesImg = {
+  images: img[];
+  id: string;
+  newSrc: string;
+};
 
-const ImageUploadModal = ({ onImageUpload }: ImageUploadModalProps) => {
-  const handleDrop = async (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    console.log(file);
-    const base64 = await convertToBase64(file);
-    console.log(base64);
-    //const file = acceptedFile[0];
-    //const base64 = await convertToBase64(acceptedFile);
-    //onImageUpload(base64);
-    //console.log(typeof base64);
-    //if (acceptedFile && acceptedFile.length > 0) {
-    //  const base64 = await convertToBase64(acceptedFile);
-    //  console.log(base64);
-    //  onImageUpload(base64);
-    //}
+const ImageUploadModal = ({
+  updateBlock,
+  id,
+  images,
+}: ImageUploadModalProps) => {
+  const [newImageUrl, setNewImageUrl] = useState<img[] | null>();
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleDrop = async () => {
+    //updateBlock({ content: { images: newImageUrl } });
+    console.log(newImageUrl);
   };
 
-  //  const [postImage, setPostImage] = useState({ myFile: "" });
+  const updateSrcById = (images, id, newSrc) => {
+    return images.map((image) => {
+      if (image._id === id) {
+        return { ...image, imageUrl: newSrc };
+      }
+      return image;
+    });
+  };
 
-  //  const handleSubmit = (e) => {
-  //    e.preventDefault();
-  //    //onImageUpload(postImage);
-  //    console.log(postImage);
-  //    console.log("Uploaded");
-  //  };
-
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertToBase64(file);
-    console.log(base64);
-    await onImageUpload({ imageUrl: base64 });
+  const handleFileUpload = async (file: any) => {
+    const base64 = await convertToBase64(file[0]);
+    const updatedImages = updateSrcById(images, id, base64);
+    setNewImageUrl(updatedImages);
   };
 
   return (
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>Image loader</DialogTitle>
-
-        <div className="App">
-          <form onSubmit={(e) => handleFileUpload(e)}>
-            {/*<label htmlFor="file-upload" className="custom-file-upload">
-              <img src={postImage.myFile || undefined} alt="" />
-            </label>*/}
-
-            <input
-              type="file"
-              //  lable="Image"
-              name="myFile"
-              id="file-upload"
-              accept=".jpeg, .png, .jpg"
-              onChange={(e) => handleFileUpload(e)}
-            />
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-
-        {/*<Dropzone onDrop={handleDrop}>
-            {({ getRootProps, getInputProps }) => (
-              <div {...getRootProps()} className="dropzone">
-                <input {...getInputProps()} />
-                <p>Drag & drop an image here, or click to select one</p>
-              </div>
-            )}
-            <DragAndDrop />
-          </Dropzone>*/}
-        {/*<DropzoneComponent handleDrop={handleDrop} />*/}
-      </DialogHeader>
-    </DialogContent>
+    <DialogHeader>
+      <DialogTitle>Image loader</DialogTitle>
+      <DropzoneComponent
+        handleDrop={handleFileUpload}
+        selectedFile={selectedFile}
+        setSelectedFile={setSelectedFile}
+      />
+      {selectedFile && (
+        <Button onClick={handleDrop} className="w-[200px] m-auto mt-20px">
+          Save
+        </Button>
+      )}
+    </DialogHeader>
   );
 };
 
 export default ImageUploadModal;
-
-function convertToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    };
-    fileReader.onerror = (error) => {
-      reject(error);
-    };
-  });
-}
