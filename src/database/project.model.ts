@@ -26,21 +26,6 @@ const imageBlockSchema = new Schema({
   },
 });
 
-const projectSchema = new Schema(
-  {
-    name: String,
-    description: {
-      type: String,
-      required: false,
-    },
-    author: { type: Schema.Types.ObjectId, ref: "User" },
-    blocks: [{ type: Schema.Types.ObjectId, ref: "BlockModel" }],
-  },
-  {
-    timestamps: true,
-  },
-);
-
 export const BlockModel = models.BlockModel || model("BlockModel", blockSchema);
 
 export const TextBlockModel =
@@ -50,6 +35,3 @@ export const TextBlockModel =
 export const ImageBlockModel =
   models.ImageBlockModel ||
   BlockModel.discriminator("ImageBlockModel", imageBlockSchema);
-
-export const ProjectModel =
-  models.ProjectModel || model("ProjectModel", projectSchema);

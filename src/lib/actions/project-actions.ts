@@ -1,9 +1,10 @@
 "use server";
 
-import { connectToDatabase } from "lib/mongoose";
+import { connectToDatabase } from "shared/mongoose";
 import { revalidatePath } from "next/cache";
-import { BlockModel, ProjectModel } from "database/project.model";
-import User from "database/user.model";
+import { BlockModel } from "database/project.model";
+import { ProjectModel } from "entities/project";
+import { User } from "entities/user";
 
 export async function getProjects(userId: string) {
   try {

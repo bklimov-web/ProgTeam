@@ -1,8 +1,8 @@
 import { SignedIn, SignedOut, auth } from "@clerk/nextjs";
-import AddProjectForm from "components/home-page/add-project-form";
-import ProjectsSection from "components/home-page/projects-section";
+import AddProjectForm from "widgets/add-project-form";
 import { createProject, getProjects } from "lib/actions/project-actions";
 import { getUserById } from "lib/actions/user-actions";
+import ProjectsSection from "widgets/projects-section";
 
 export default async function home() {
   const { userId } = auth();

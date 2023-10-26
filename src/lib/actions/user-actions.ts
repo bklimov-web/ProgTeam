@@ -1,14 +1,15 @@
 "use server";
 
-import User from "database/user.model";
-import { connectToDatabase } from "../mongoose";
+import { connectToDatabase } from "../../shared/mongoose";
 import { revalidatePath } from "next/cache";
 import {
   CreateUserParams,
   DeleteUserParams,
   UpdateUserParams,
 } from "./shared.types";
-import { BlockModel, ProjectModel } from "database/project.model";
+import { BlockModel } from "database/project.model";
+import { ProjectModel } from "entities/project";
+import { User } from "entities/user";
 
 export async function getUserById(params: any) {
   try {

@@ -1,5 +1,5 @@
-import BlocksList from "components/blocks-list";
-import NewBlockPanel from "components/new-block-panel";
+import BlocksList from "widgets/blocks-list";
+import NewBlockPanel from "widgets/new-block-panel";
 import { createBlock } from "lib/actions/block-actions";
 import { getProjectById } from "lib/actions/project-actions";
 import { MoveLeft } from "lucide-react";

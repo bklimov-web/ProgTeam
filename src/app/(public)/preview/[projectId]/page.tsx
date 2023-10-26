@@ -1,4 +1,4 @@
-import BlocksList from "components/blocks-list";
+import BlocksList from "widgets/blocks-list";
 import { getProjectById } from "lib/actions/project-actions";
 
 const Page = async ({

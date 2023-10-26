@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "components/shared/navbar/navbar";
+import Navbar from "widgets/navbar/navbar";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (

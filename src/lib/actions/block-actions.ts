@@ -1,4 +1,5 @@
-import { BlockModel, ProjectModel } from "database/project.model";
+import { BlockModel } from "database/project.model";
+import { ProjectModel } from "entities/project";
 import { revalidatePath } from "next/cache";
 
 export const createBlock = async (projectId: string, data: any) => {
