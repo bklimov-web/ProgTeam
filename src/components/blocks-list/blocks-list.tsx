@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { getBlock } from "./get-block";
 import { BlockWrapper } from "components/block-wrapper";
-import { deleteBlock, updateBlock } from "lib/actions/block-actions";
+import { updateBlock } from "lib/actions/block-actions";
 
 type Props = {
   blocks: any[];
@@ -20,15 +20,21 @@ const BlocksList: FC<Props> = ({ blocks, projectId, preview = false }) => {
         );
 
         if (preview) {
+          if (block.disabled) {
+            return null;
+          }
+
           return component;
         }
 
         return (
           <BlockWrapper
             key={id}
-            handleDelete={deleteBlock(projectId, id)}
             contentSettings={contentSettings}
             blockSettings={blockSettings}
+            projectId={projectId}
+            id={id}
+            disabled={block.disabled}
           >
             {component}
           </BlockWrapper>
