@@ -22,7 +22,19 @@ const textBlockSchema = new Schema({
 
 const imageBlockSchema = new Schema({
   content: {
-    imageUrls: [String],
+    images: [
+      {
+        thumbnailUrl: String,
+        imageUrl: String,
+        title: String,
+        alt: String,
+      },
+    ],
+  },
+  styles: {
+    paddingTop: String,
+    paddingBottom: String,
+    background: String,
   },
 });
 

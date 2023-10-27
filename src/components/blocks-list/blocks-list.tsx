@@ -14,21 +14,26 @@ const BlocksList: FC<Props> = ({ blocks, projectId, preview = false }) => {
     <section>
       {blocks.map((block) => {
         const id = block._id.toString();
-        const { component, form } = getBlock(
+        const { component, contentSettings, blockSettings } = getBlock(
           block,
           updateBlock(id, block.type),
         );
 
         if (preview) {
+          if (block.disabled) {
+            return null;
+          }
+
           return component;
         }
 
         return (
           <BlockWrapper
             key={id}
+            contentSettings={contentSettings}
+            blockSettings={blockSettings}
             projectId={projectId}
             id={id}
-            content={form}
             disabled={block.disabled}
           >
             {component}

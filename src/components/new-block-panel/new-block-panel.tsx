@@ -30,10 +30,40 @@ const BLOCKS = [
     id: "images",
     label: "Images",
     blockData: {
-      content: {
-        imageUrls: ["img1", "img2"],
-      },
       type: "ImageBlockModel",
+      content: {
+        images: [
+          {
+            alt: "Img1",
+            title: "Img1",
+            imageUrl:
+              "http://static8.depositphotos.com/1146092/920/i/450/depositphotos_9202690-Dog-sleep.jpg",
+            thumbnailUrl:
+              "http://static8.depositphotos.com/1146092/920/i/450/depositphotos_9202690-Dog-sleep.jpg",
+          },
+          {
+            alt: "Img2",
+            title: "Img2",
+            imageUrl:
+              "http://st.depositphotos.com/1030020/3490/i/450/depositphotos_34909067-German-Shepherd-Dog-and-cat-together.jpg",
+            thumbnailUrl:
+              "http://st.depositphotos.com/1030020/3490/i/450/depositphotos_34909067-German-Shepherd-Dog-and-cat-together.jpg",
+          },
+          {
+            alt: "Img3",
+            title: "Img3",
+            imageUrl:
+              "http://static9.depositphotos.com/1032440/1111/i/450/depositphotos_11110118-Little-dogs-in-the-park.jpg",
+            thumbnailUrl:
+              "http://static9.depositphotos.com/1032440/1111/i/450/depositphotos_11110118-Little-dogs-in-the-park.jpg",
+          },
+        ],
+      },
+      styles: {
+        paddingTop: "10px",
+        paddingBottom: "10px",
+        background: "white",
+      },
     },
   },
   // {

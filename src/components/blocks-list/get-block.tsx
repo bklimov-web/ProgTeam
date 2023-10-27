@@ -1,13 +1,19 @@
-import { ImageBlock } from "components/blocks/image-block";
-import ImageBlockForm from "components/blocks/image-block/image-block-form";
-import TextBlock from "components/blocks/text-block";
-import TextBlockForm from "components/blocks/text-block/text-block-form";
+import {
+  ImageBlock,
+  ImageBlockSettings,
+  ImageContentSettings,
+} from "components/blocks/image-block";
+import { TextBlock, TextContentSettings } from "components/blocks/text-block";
 import { ReactNode } from "react";
 
 export const getBlock = (
   block: any,
-  updateBlock: any,
-): { component: ReactNode; form: ReactNode } => {
+  updateBlock: any
+): {
+  component: ReactNode;
+  contentSettings: ReactNode;
+  blockSettings: ReactNode;
+} => {
   switch (block.type) {
     case "TextBlockModel":
       const { title, description, subtitle } = block.content;
@@ -20,19 +26,45 @@ export const getBlock = (
             subtitle={subtitle}
           />
         ),
-        form: (
-          <TextBlockForm
+        contentSettings: (
+          <TextContentSettings
             updateBlock={updateBlock}
             defaultValues={block.content.toJSON()}
           />
         ),
+        blockSettings: null,
       };
     case "ImageBlockModel":
+      const {
+        content: { images },
+        styles,
+        _id,
+      } = block;
+
+      const imagesList = images.map((image: any) => {
+        return {
+          ...image.toJSON(),
+          _id: image._id.toString(),
+        };
+      });
+
+      const id = _id.toString();
+
       return {
-        component: <ImageBlock />,
-        form: <ImageBlockForm />,
+        component: (
+          <ImageBlock id={id} styles={styles.toJSON()} images={imagesList} />
+        ),
+        contentSettings: (
+          <ImageContentSettings data={imagesList} updateBlock={updateBlock} />
+        ),
+        blockSettings: (
+          <ImageBlockSettings
+            divStyles={styles.toJSON()}
+            updateBlock={updateBlock}
+          />
+        ),
       };
     default:
-      return { component: null, form: null };
+      return { component: null, contentSettings: null, blockSettings: null };
   }
 };

@@ -23,21 +23,21 @@ const formSchema = z.object({
   description: z.string(),
 });
 
-export type TextBlockFormSchema = z.infer<typeof formSchema>;
+export type TextContentSettingsSchema = z.infer<typeof formSchema>;
 
-function TextBlockForm({
+function TextContentSettings({
   defaultValues,
   updateBlock,
 }: {
   defaultValues: TextBlockContentProps;
-  updateBlock: (values: { content: TextBlockFormSchema }) => void;
+  updateBlock: (data: { content: TextBlockContentProps }) => void;
 }) {
-  const form = useForm<TextBlockFormSchema>({
+  const form = useForm<TextContentSettingsSchema>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
 
-  function onSubmit(values: TextBlockFormSchema) {
+  function onSubmit(values: TextContentSettingsSchema) {
     updateBlock({ content: values });
   }
 
@@ -99,4 +99,4 @@ function TextBlockForm({
   );
 }
 
-export default TextBlockForm;
+export default TextContentSettings;

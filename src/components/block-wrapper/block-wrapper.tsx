@@ -25,15 +25,17 @@ type Props = {
   id: string;
   disabled: boolean;
   children: ReactNode;
-  content: any;
+  contentSettings: any;
+  blockSettings: any;
   className?: string;
 };
 
 const BlockWrapper = ({
   children,
+  contentSettings,
+  blockSettings,
   id,
   projectId,
-  content,
   className,
   disabled,
 }: Props) => {
@@ -72,14 +74,25 @@ const BlockWrapper = ({
       }`}
     >
       {!disabled && (
-        <Sidebar
-          content={content}
-          trigger={
-            <Button className="absolute left-[100px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              Settings
-            </Button>
-          }
-        />
+        <>
+          <Sidebar
+            content={contentSettings}
+            trigger={
+              <Button className="absolute left-[100px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Content Settings
+              </Button>
+            }
+          />
+
+          <Sidebar
+            content={blockSettings}
+            trigger={
+              <Button className="absolute left-[260px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Block Settings
+              </Button>
+            }
+          />
+        </>
       )}
 
       <ActionsPanel wrapperActions={wrapperActions} />
