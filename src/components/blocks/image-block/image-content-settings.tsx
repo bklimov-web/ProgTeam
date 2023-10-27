@@ -7,7 +7,7 @@ import { Label } from "components/shared/ui/label";
 import { Trash2 } from "lucide-react";
 
 import { convertToBase64 } from "../../../lib/utils";
-import { ImageContentProps, img } from "./types";
+import { ImageContentProps } from "./types";
 
 const ImageContentSettings = ({ data, updateBlock }: ImageContentProps) => {
   const defaultContent = data;
@@ -20,7 +20,7 @@ const ImageContentSettings = ({ data, updateBlock }: ImageContentProps) => {
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    imageId: string
+    imageId: string,
   ) => {
     const { value } = e.target;
     const updatedContent = content.map((image) => {

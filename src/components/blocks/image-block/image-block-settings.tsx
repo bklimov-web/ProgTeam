@@ -26,10 +26,8 @@ import {
 } from "components/shared/ui/form";
 import { ChromePicker } from "react-color";
 import { ImageBlockProps, divStyles } from "./types";
-import { useState } from "react";
 
 const ImageBlockSettings = ({ divStyles, updateBlock }: ImageBlockProps) => {
-  const [styles, setStyles] = useState(divStyles);
   const form = useForm<divStyles>({
     defaultValues: divStyles,
   });
@@ -132,8 +130,9 @@ const ImageBlockSettings = ({ divStyles, updateBlock }: ImageBlockProps) => {
             Submit
           </Button>
           <Button
+            type="button"
             className="w-[150px]"
-            onClick={() => updateBlock({ styles: styles })}
+            onClick={() => form.reset()}
           >
             Cancel
           </Button>

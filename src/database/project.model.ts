@@ -52,18 +52,6 @@ const projectSchema = new Schema(
   },
 );
 
-const photoSchema = new Schema(
-  {
-    public_id: String,
-    secure_url: String,
-  },
-  {
-    timestamps: true,
-  },
-);
-
-export const Photo = models.photos || model("photos", photoSchema);
-
 export const BlockModel = models.BlockModel || model("BlockModel", blockSchema);
 
 export const TextBlockModel =

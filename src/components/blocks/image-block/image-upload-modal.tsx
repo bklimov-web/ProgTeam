@@ -1,14 +1,8 @@
 import { DialogHeader, DialogTitle } from "components/shared/ui/dialog";
-import { ImageUploadModalProps, img } from "./types";
+import { ImageUploadModalProps } from "./types";
 import { BlockModel } from "database/project.model";
 import { revalidatePath } from "next/cache";
 import { DragAndDropImage } from "components/shared/drag-and-drop-image";
-
-type typesImg = {
-  images: img[];
-  id: string;
-  newSrc: string;
-};
 
 const ImageUploadModal = ({
   id,
