@@ -22,8 +22,8 @@ export type ImageProps = {
 };
 
 export type ImageUploadModalProps = {
-  updateBlock: (values: any) => void;
   id: string;
+  imageIndex: number;
   images: img[];
 };
 

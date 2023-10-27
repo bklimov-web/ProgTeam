@@ -14,7 +14,7 @@ const BlocksList: FC<Props> = ({ blocks, projectId, preview = false }) => {
     <section>
       {blocks.map((block) => {
         const id = block._id.toString();
-        const { component, form } = getBlock(
+        const { component, contentSettings, blockSettings } = getBlock(
           block,
           updateBlock(id, block.type),
         );
@@ -27,7 +27,8 @@ const BlocksList: FC<Props> = ({ blocks, projectId, preview = false }) => {
           <BlockWrapper
             key={id}
             handleDelete={deleteBlock(projectId, id)}
-            content={form}
+            contentSettings={contentSettings}
+            blockSettings={blockSettings}
           >
             {component}
           </BlockWrapper>

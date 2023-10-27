@@ -8,23 +8,34 @@ import { ReactNode } from "react";
 type Props = {
   handleDelete: () => void;
   children: ReactNode;
-  content: any;
+  contentSettings: any;
+  blockSettings: any;
   className?: string;
 };
 
 const BlockWrapper = ({
   children,
   handleDelete,
-  content,
+  contentSettings,
+  blockSettings,
   className,
 }: Props) => {
   return (
     <div className={`relative group align-middle h-fit w-screen ${className}`}>
       <Sidebar
-        content={content}
+        content={contentSettings}
         trigger={
           <Button className="absolute left-[100px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Settings
+            Content Settings
+          </Button>
+        }
+      />
+
+      <Sidebar
+        content={blockSettings}
+        trigger={
+          <Button className="absolute left-[260px] top-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Block Settings
           </Button>
         }
       />
