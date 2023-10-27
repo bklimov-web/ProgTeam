@@ -26,6 +26,20 @@ const imageBlockSchema = new Schema({
   },
 });
 
+const backgroundBlockSchema = new Schema({
+  content: {
+    color: String,
+    titlebg: String,
+  },
+});
+
+const headerBlockSchema = new Schema({
+  content: {
+    logo: String,
+    navLinks: [String],
+  },
+});
+
 const projectSchema = new Schema(
   {
     name: String,
@@ -50,6 +64,14 @@ export const TextBlockModel =
 export const ImageBlockModel =
   models.ImageBlockModel ||
   BlockModel.discriminator("ImageBlockModel", imageBlockSchema);
+
+export const BackgroundBlockModel =
+  models.BackgroundBlockModel ||
+  BlockModel.discriminator("BackgroundBlockModel", backgroundBlockSchema);
+
+export const HeaderBlockModel =
+  models.HeaderBlockModel ||
+  BlockModel.discriminator("HeaderBlockModel", headerBlockSchema);
 
 export const ProjectModel =
   models.ProjectModel || model("ProjectModel", projectSchema);

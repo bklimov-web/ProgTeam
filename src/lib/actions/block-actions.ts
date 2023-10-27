@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 export const createBlock = async (projectId: string, data: any) => {
   "use server";
 
+  console.log(data);
   try {
     const createdData = { ...data, projectId, disabled: false };
 

@@ -36,6 +36,28 @@ const BLOCKS = [
       type: "ImageBlockModel",
     },
   },
+  {
+    id: "header",
+    label: "Header",
+    blockData: {
+      content: {
+        logo: "Logo",
+        navLinks: "NavLinks",
+      },
+      type: "HeaderBlockModel",
+    },
+  },
+  {
+    id: "background",
+    label: "Background",
+    blockData: {
+      content: {
+        color: "Color",
+        titlebg: "Titlebg",
+      },
+      type: "BackgroundBlockModel",
+    },
+  },
   // {
   //   id: "other",
   //   label: "Other",
