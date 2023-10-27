@@ -5,6 +5,7 @@ import { Progress } from "components/shared/ui/progress";
 import { useEdgeStore } from "lib/edgestore";
 import { FC, useState } from "react";
 import { SingleImageDropzone } from "./single-image-dropzone";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 type Props = {
   updateBlock: (imageUrl: string, thumbnailUrl: string) => void;
@@ -45,6 +46,9 @@ const DragAndDropImage: FC<Props> = ({ updateBlock }) => {
       >
         Upload
       </Button>
+      <DialogClose asChild className="ml-2">
+        <Button>Close</Button>
+      </DialogClose>
     </div>
   );
 };

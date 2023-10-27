@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 
 export const getBlock = (
   block: any,
-  updateBlock: any,
+  updateBlock: any
 ): {
   component: ReactNode;
   contentSettings: ReactNode;

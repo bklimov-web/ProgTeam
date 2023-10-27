@@ -33,14 +33,7 @@ const ImageUploadModal = ({
   return (
     <DialogHeader>
       <DialogTitle>Image loader</DialogTitle>
-
       <DragAndDropImage updateBlock={handleUpdateBlock} />
-
-      {/* {selectedFile && (
-        <Button onClick={handleDrop} className="w-[200px] m-auto mt-20px">
-          Save
-        </Button>
-      )} */}
     </DialogHeader>
   );
 };

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import { Button } from "components/shared/ui/button";
 import { Input } from "components/shared/ui/input";
@@ -7,12 +7,21 @@ import { Label } from "components/shared/ui/label";
 import { Trash2 } from "lucide-react";
 
 import { convertToBase64 } from "../../../lib/utils";
-import { ImageContentProps } from "./types";
+import { ImageContentProps, img } from "./types";
 
 const ImageContentSettings = ({ data, updateBlock }: ImageContentProps) => {
+  const defaultContent = data;
   const [content, setContent] = useState(data);
+  const fileInput = useRef(null);
 
-  const handleInputChange = (e, imageId) => {
+  const handleButtonClick = () => {
+    fileInput.current.click();
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    imageId: string
+  ) => {
     const { value } = e.target;
     const updatedContent = content.map((image) => {
       if (image._id === imageId) {
@@ -28,16 +37,20 @@ const ImageContentSettings = ({ data, updateBlock }: ImageContentProps) => {
     updateBlock({ content: { images: content } });
   };
 
-  const deleteImage = (id) => {
+  const onCancel = () => {
+    updateBlock({ content: { images: defaultContent } });
+  };
+
+  const deleteImage = (id: string) => {
     const updatedContent = content.filter((image) => image._id !== id);
     console.log(updatedContent);
     setContent(updatedContent);
   };
 
-  const addImage = async (e) => {
+  const addImage = async (e: any) => {
     const file = e.target.files[0];
     const base64 = await convertToBase64(file);
-    const updatedContent = [
+    const updatedContent: any = [
       ...content,
       {
         imageUrl: base64,
@@ -73,20 +86,27 @@ const ImageContentSettings = ({ data, updateBlock }: ImageContentProps) => {
             </div>
           );
         })}
-      <Button className="w-[200px]" onClick={onSubmit}>
+      <div>
+        <Button className="w-[200px]" onClick={handleButtonClick}>
+          Add photo
+        </Button>
         <input
           type="file"
-          //  lable="Image"
-          name="myFile"
           id="file-upload"
+          ref={fileInput}
+          style={{ display: "none" }}
           accept=".jpeg, .png, .jpg"
           onChange={(e) => addImage(e)}
         />
-        Add photo
-      </Button>
-      <Button className="w-[200px]" onClick={onSubmit}>
-        Save
-      </Button>
+      </div>
+      <div className="flex justify-around">
+        <Button className="w-[150px]" onClick={onSubmit}>
+          Save
+        </Button>
+        <Button className="w-[150px]" onClick={onCancel}>
+          Cancel
+        </Button>
+      </div>
     </div>
   );
 };

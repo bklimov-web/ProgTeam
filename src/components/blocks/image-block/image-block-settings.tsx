@@ -26,8 +26,10 @@ import {
 } from "components/shared/ui/form";
 import { ChromePicker } from "react-color";
 import { ImageBlockProps, divStyles } from "./types";
+import { useState } from "react";
 
 const ImageBlockSettings = ({ divStyles, updateBlock }: ImageBlockProps) => {
+  const [styles, setStyles] = useState(divStyles);
   const form = useForm<divStyles>({
     defaultValues: divStyles,
   });
@@ -38,7 +40,7 @@ const ImageBlockSettings = ({ divStyles, updateBlock }: ImageBlockProps) => {
 
   return (
     <Form {...form}>
-      <form className="w-2/3 space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="w-[90%] space-y-6">
         <FormField
           control={form.control}
           name="paddingTop"
@@ -101,10 +103,11 @@ const ImageBlockSettings = ({ divStyles, updateBlock }: ImageBlockProps) => {
           control={form.control}
           name="background"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-[100%]">
               <FormLabel>Background Color</FormLabel>
+              <br />
               <Popover>
-                <PopoverTrigger>
+                <PopoverTrigger className="w-[100%]">
                   <FormControl>
                     <Input placeholder="background color" {...field} />
                   </FormControl>
@@ -115,6 +118,7 @@ const ImageBlockSettings = ({ divStyles, updateBlock }: ImageBlockProps) => {
                     onChange={(e) => {
                       field.onChange(e.hex);
                     }}
+                    className="pointer-events-auto"
                   />
                 </PopoverContent>
               </Popover>
@@ -123,8 +127,17 @@ const ImageBlockSettings = ({ divStyles, updateBlock }: ImageBlockProps) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
-        <Button onClick={() => console.log(divStyles)}>Cancel</Button>
+        <div className="flex justify-around w-[100%] h-[300px] items-end">
+          <Button className="w-[150px]" onClick={form.handleSubmit(onSubmit)}>
+            Submit
+          </Button>
+          <Button
+            className="w-[150px]"
+            onClick={() => updateBlock({ styles: styles })}
+          >
+            Cancel
+          </Button>
+        </div>
       </form>
     </Form>
   );
