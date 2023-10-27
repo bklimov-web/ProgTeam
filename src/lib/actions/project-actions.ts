@@ -42,6 +42,7 @@ export const createProject = async (formData: FormData, authorId: string) => {
     const project = await ProjectModel.create({
       name,
       author: authorId,
+      isPublished: false,
     });
 
     await User.findByIdAndUpdate(authorId, {
@@ -66,6 +67,19 @@ export const deleteProject = async (id: string, userId: string) => {
     });
 
     revalidatePath("/");
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const updateProject = async (id: string, data: any) => {
+  "use server";
+
+  try {
+    await ProjectModel.findOneAndUpdate({ _id: id }, data, { new: true });
+
+    revalidatePath("/project/:id");
   } catch (error) {
     console.log(error);
     throw error;

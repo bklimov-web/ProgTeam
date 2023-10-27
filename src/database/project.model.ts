@@ -40,6 +40,7 @@ const imageBlockSchema = new Schema({
 
 const projectSchema = new Schema(
   {
+    isPublished: Boolean,
     name: String,
     description: {
       type: String,

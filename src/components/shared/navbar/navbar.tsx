@@ -6,14 +6,17 @@ import Link from "next/link";
 
 const Navbar = () => {
   const params = useParams();
+  // const project = getProjectById(params.projectId as string);
 
   return (
     <div className="w-screen h-[60px] shadow-lg">
       <div className="w-[1200px] h-full mx-auto flex justify-between items-center">
         {!!params.projectId && (
-          <Button asChild>
-            <Link href={`/preview/${params.projectId}`}>Preview</Link>
-          </Button>
+          <>
+            <Button asChild>
+              <Link href={`/preview/${params.projectId}`}>Preview</Link>
+            </Button>
+          </>
         )}
 
         <div className="flex gap-4 ml-auto">
