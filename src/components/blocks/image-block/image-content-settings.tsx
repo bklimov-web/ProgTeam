@@ -12,10 +12,10 @@ import { ImageContentProps } from "./types";
 const ImageContentSettings = ({ data, updateBlock }: ImageContentProps) => {
   const defaultContent = data;
   const [content, setContent] = useState(data);
-  const fileInput = useRef(null);
+  const fileInput = useRef<HTMLInputElement>(null);
 
   const handleButtonClick = () => {
-    fileInput.current.click();
+    fileInput.current?.click();
   };
 
   const handleInputChange = (
