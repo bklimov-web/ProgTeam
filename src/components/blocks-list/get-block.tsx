@@ -4,9 +4,9 @@ import TextBlock from "components/blocks/text-block";
 import TextBlockForm from "components/blocks/text-block/text-block-form";
 import BackgroundBlock from "components/blocks/background-block/background-block";
 import BackgroundForm from "components/blocks/background-block/background-block-form";
-import Header from "components/blocks/header/Header";
-import HeaderForm from "components/blocks/header/header-form";
 import { ReactNode } from "react";
+import HeaderBlock from "components/blocks/header-block";
+import HeaderBlockForm from "components/blocks/header-block/header-block-form";
 
 export const getBlock = (
   block: any,
@@ -53,11 +53,16 @@ export const getBlock = (
     case "HeaderBlockModel":
       const { logo, navLinks } = block.content;
       return {
-        component: <Header logo={logo} navLinks={navLinks} />,
+        component: (
+          <HeaderBlock
+            logo={logo.toJSON()}
+            navLinks={navLinks.map((link: any) => link.toJSON())}
+          />
+        ),
         form: (
-          <HeaderForm
-            updateBlock={updateBlock}
-            defaultValues={block.content.toJSON()}
+          <HeaderBlockForm
+          // updateBlock={updateBlock}
+          // defaultValues={block.content.toJSON()}
           />
         ),
       };

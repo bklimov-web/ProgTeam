@@ -41,8 +41,15 @@ const BLOCKS = [
     label: "Header",
     blockData: {
       content: {
-        logo: "Logo",
-        navLinks: "NavLinks",
+        logo: {
+          src: "",
+          alt: "Logo",
+        },
+        navLinks: [
+          { label: "Home", href: "/" },
+          { label: "About", href: "/" },
+          { label: "Contacts", href: "/" },
+        ],
       },
       type: "HeaderBlockModel",
     },
@@ -52,8 +59,8 @@ const BLOCKS = [
     label: "Background",
     blockData: {
       content: {
-        color: "Color",
-        titlebg: "Titlebg",
+        color: "#fff",
+        titleBg: "Pretty background",
       },
       type: "BackgroundBlockModel",
     },

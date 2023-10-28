@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "components/shared/ui/form";
 import { Input } from "components/shared/ui/input";
-import { HeaderContentProps } from "./Header";
+import { HeaderContentProps } from "./header-block";
 import { SheetClose } from "components/shared/ui/sheet";
 
 const formSchema = z.object({

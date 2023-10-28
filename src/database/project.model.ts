@@ -35,8 +35,16 @@ const backgroundBlockSchema = new Schema({
 
 const headerBlockSchema = new Schema({
   content: {
-    logo: String,
-    navLinks: [String],
+    logo: {
+      src: String,
+      alt: String,
+    },
+    navLinks: [
+      {
+        label: String,
+        href: String,
+      },
+    ],
   },
 });
 
