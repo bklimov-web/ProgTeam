@@ -1,6 +1,4 @@
 import { ClerkProvider } from "@clerk/nextjs";
-// import { ThemeProvider } from "./theme-provider";
-// import { ThemeSwitcher } from "../components/theme-switcher";
 import React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -20,14 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ThemeSwitcher /> */}
       <html lang="en">
-        <body className="bg-slate-100 text-slate-800 dark:text-sky-500 dark:bg-gradient-to-bl from-slate-950 to-cyan-950 {`${inter.className} w-screen mx-auto`}">
+        <body
+          className={`bg-slate-100 text-slate-800 dark:text-sky-500 dark:bg-gradient-to-bl from-slate-950 to-cyan-950 ${inter.className} w-screen mx-auto`}
+        >
           {children}
         </body>
       </html>
-      {/* </ThemeProvider> */}
     </ClerkProvider>
   );
 }
